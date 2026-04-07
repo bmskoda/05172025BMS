@@ -1,0 +1,59 @@
+FOR IMMEDIATE RELEASE
+April 07, 2026
+
+======================================================================
+AEGIS FORENSIC INTELLIGENCE PLATFORM — INVESTIGATION FINDINGS
+======================================================================
+
+Investigation ID : AEGIS-INV-001
+Report ID        : RPT-DEC7334D69A848F1
+Classification   : LAW ENFORCEMENT SENSITIVE
+Temporal Scope   : 1985-08-20 through 2026-04-07
+Platform Version : AEGIS v20.1.0
+
+SUMMARY
+----------------------------------------------------------------------
+AEGIS platform analysis across 31 blockchain networks identified 20 forensic findings. Transaction classification covered 34 transactions: 4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean. Evidence chain sealed with 37 ECDSA-signed links (verified: True).
+
+KEY METRICS
+----------------------------------------------------------------------
+Total Findings          : 20
+Critical Findings       : 4
+High-Severity Findings  : 6
+Average Confidence      : 92.6%
+
+TOP FINDINGS
+----------------------------------------------------------------------
+  - [CRITICAL] OFAC-listed address on ethereum
+  - [CRITICAL] OFAC-listed address on ethereum
+  - [CRITICAL] OFAC-listed address on ethereum
+  - [CRITICAL] OFAC-listed address on tron
+  - [HIGH] 7 mixer contract(s) catalogued on ethereum
+  - [HIGH] 1 mixer contract(s) catalogued on bsc
+  - [HIGH] 1 mixer contract(s) catalogued on polygon
+  - [HIGH] 1 mixer contract(s) catalogued on arbitrum
+  - [HIGH] 1 mixer contract(s) catalogued on optimism
+  - [HIGH] Wash trading detected — NFT 0xffffffff...#1337
+
+METHODOLOGY
+----------------------------------------------------------------------
+All findings derived exclusively from live government and
+primary-source APIs.  Analytical methods include recursive
+transaction tracing, HyperGraph GNN risk classification,
+OFAC/SDN sanctions screening, mixer/tumbler pattern detection,
+cross-chain bridge tracking, NFT wash-trading heuristics,
+DeFi protocol classification, and ECDSA-P384 evidence chain
+signing.
+
+COMPLIANCE
+----------------------------------------------------------------------
+FRE 902(13), FRE 902(14), NIST SP 800-86, ISO/IEC 27037:2012, FBI CJIS v5.9.2, DOJ Digital Evidence Standards, NIST SP 800-53 Rev 5, ISO 27001:2022, FIPS 140-3, PEP 8, W3C
+
+INTEGRITY
+----------------------------------------------------------------------
+Content Hash (SHA3-512):
+789648e531707066e0db7eba76402202b6cf42d15841c41ef3df3ce3c92b9bc16b80c0e886b2a7a683274f55e744b22f67b9b75063b749898df1315f72127c93
+
+======================================================================
+AEGIS Forensic Platform — 2026-04-07T17:32:55.268996+00:00
+======================================================================
