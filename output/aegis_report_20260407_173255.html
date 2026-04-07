@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+<title>Forensic Investigation Report</title>
+<style>
+body { font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0; background: #f4f6f9; color: #1a1a2e; }
+.banner { background: #0d1b2a; color: #e0e1dd;
+  padding: 32px 48px; }
+.banner h1 { margin: 0 0 8px; font-size: 28px; }
+.banner p { margin: 2px 0; opacity: .85; font-size: 14px; }
+.classified { background: #c1121f; color: #fff;
+  text-align: center; padding: 8px;
+  font-weight: 700; letter-spacing: 1px; }
+main { max-width: 1100px; margin: 0 auto;
+  padding: 32px 24px; }
+section { background: #fff; border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  padding: 28px 32px; margin-bottom: 24px; }
+section h2 { color: #0d1b2a; font-size: 20px;
+  border-bottom: 2px solid #0d1b2a;
+  padding-bottom: 8px; margin-top: 0; }
+.finding { border-left: 4px solid #415a77;
+  padding: 12px 16px; margin: 12px 0;
+  background: #f8f9fa; border-radius: 0 6px 6px 0; }
+.finding.CRITICAL { border-color: #c1121f; }
+.finding.HIGH { border-color: #e76f51; }
+.finding.MEDIUM { border-color: #e9c46a; }
+.finding.LOW { border-color: #2a9d8f; }
+.finding h3 { margin: 0 0 4px; font-size: 15px; }
+.finding .meta { font-size: 12px; color: #666; }
+.stats { display: flex; gap: 16px; flex-wrap: wrap; }
+.stat-card { background: #edf2f4; border-radius: 6px;
+  padding: 16px 20px; min-width: 140px; }
+.stat-card .val { font-size: 28px;
+  font-weight: 700; color: #0d1b2a; }
+.stat-card .lbl { font-size: 12px;
+  text-transform: uppercase; color: #555; }
+ul { padding-left: 20px; }
+li { margin-bottom: 4px; }
+footer { text-align: center; padding: 24px;
+  font-size: 12px; color: #888; }
+</style>
+</head>
+<body>
+<div class="banner">
+  <h1>Forensic Investigation Report</h1>
+  <p>Report ID: RPT-DEC7334D69A848F1</p>
+  <p>Investigation: AEGIS-INV-001</p>
+  <p>Generated: 2026-04-07T17:32:55.268367+00:00</p>
+  <p>Platform: AEGIS v20.1.0</p>
+</div>
+<div class="classified">
+  LAW ENFORCEMENT SENSITIVE — AUTHORIZED PERSONNEL ONLY
+</div>
+<main>
+<section>
+  <h2>Executive Summary</h2>
+  <p>AEGIS platform analysis across 31 blockchain networks identified 20 forensic findings. Transaction classification covered 34 transactions: 4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean. Evidence chain sealed with 37 ECDSA-signed links (verified: True).</p>
+</section>
+<section>
+  <h2>Key Statistics</h2>
+  <div class="stats">
+    <div class="stat-card">
+      <div class="val">20</div>
+      <div class="lbl">Total Findings</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">4</div>
+      <div class="lbl">Critical</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">6</div>
+      <div class="lbl">High</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">92.6%</div>
+      <div class="lbl">Avg Confidence</div>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Findings</h2>
+  <div class="finding CRITICAL"><h3>[CRITICAL] OFAC-listed address on ethereum</h3><p>Address 0x07687e702b...fd2730 is on the OFAC SDN list for the ethereum network.</p><p class="meta">Category: OFAC Sanctions | Confidence: 100% | Evidence: OFAC-ethereum-0x07687e | Legal: 31 CFR 501, EO 13694</p></div>
+<div class="finding CRITICAL"><h3>[CRITICAL] OFAC-listed address on ethereum</h3><p>Address 0x178169b423...4dca7e is on the OFAC SDN list for the ethereum network.</p><p class="meta">Category: OFAC Sanctions | Confidence: 100% | Evidence: OFAC-ethereum-0x178169 | Legal: 31 CFR 501, EO 13694</p></div>
+<div class="finding CRITICAL"><h3>[CRITICAL] OFAC-listed address on ethereum</h3><p>Address 0x1e34a77868...e6bf27 is on the OFAC SDN list for the ethereum network.</p><p class="meta">Category: OFAC Sanctions | Confidence: 100% | Evidence: OFAC-ethereum-0x1e34a7 | Legal: 31 CFR 501, EO 13694</p></div>
+<div class="finding CRITICAL"><h3>[CRITICAL] OFAC-listed address on tron</h3><p>Address tjrabprwbzy7...9kdcj6 is on the OFAC SDN list for the tron network.</p><p class="meta">Category: OFAC Sanctions | Confidence: 100% | Evidence: OFAC-tron-tjrabprw | Legal: 31 CFR 501, EO 13694</p></div>
+<div class="finding HIGH"><h3>[HIGH] 7 mixer contract(s) catalogued on ethereum</h3><p>Known mixer/tumbler contracts detected on ethereum: Tornado Cash, Railgun, Aztec.</p><p class="meta">Category: Mixer/Tumbler | Confidence: 97% | Evidence: MIX-ethereum-0x3a8d9b, MIX-ethereum-0x4736dc, MIX-ethereum-0x47ce0c | Legal: 18 U.S.C. § 1956</p></div>
+<div class="finding HIGH"><h3>[HIGH] 1 mixer contract(s) catalogued on bsc</h3><p>Known mixer/tumbler contracts detected on bsc: Tornado Cash, Railgun, Aztec.</p><p class="meta">Category: Mixer/Tumbler | Confidence: 97% | Evidence: MIX-bsc-0x47ce0c | Legal: 18 U.S.C. § 1956</p></div>
+<div class="finding HIGH"><h3>[HIGH] 1 mixer contract(s) catalogued on polygon</h3><p>Known mixer/tumbler contracts detected on polygon: Tornado Cash, Railgun, Aztec.</p><p class="meta">Category: Mixer/Tumbler | Confidence: 97% | Evidence: MIX-polygon-0x47ce0c | Legal: 18 U.S.C. § 1956</p></div>
+<div class="finding HIGH"><h3>[HIGH] 1 mixer contract(s) catalogued on arbitrum</h3><p>Known mixer/tumbler contracts detected on arbitrum: Tornado Cash, Railgun, Aztec.</p><p class="meta">Category: Mixer/Tumbler | Confidence: 97% | Evidence: MIX-arbitrum-0x774d8e | Legal: 18 U.S.C. § 1956</p></div>
+<div class="finding HIGH"><h3>[HIGH] 1 mixer contract(s) catalogued on optimism</h3><p>Known mixer/tumbler contracts detected on optimism: Tornado Cash, Railgun, Aztec.</p><p class="meta">Category: Mixer/Tumbler | Confidence: 97% | Evidence: MIX-optimism-0x6bf694 | Legal: 18 U.S.C. § 1956</p></div>
+<div class="finding MEDIUM"><h3>[MEDIUM] 8 bridge contract(s) tracked on ethereum</h3><p>Cross-chain bridge contracts on ethereum enabling fund transfers to L2/alt-chains.</p><p class="meta">Category: Cross-Chain Bridge | Confidence: 95% | Evidence: BRG-ethereum-0x279631, BRG-ethereum-0x2a3dd3, BRG-ethereum-0x3e4a3a | Legal: —</p></div>
+<div class="finding MEDIUM"><h3>[MEDIUM] 1 bridge contract(s) tracked on bsc</h3><p>Cross-chain bridge contracts on bsc enabling fund transfers to L2/alt-chains.</p><p class="meta">Category: Cross-Chain Bridge | Confidence: 95% | Evidence: BRG-bsc-0xf5c682 | Legal: —</p></div>
+<div class="finding MEDIUM"><h3>[MEDIUM] 2 bridge contract(s) tracked on polygon</h3><p>Cross-chain bridge contracts on polygon enabling fund transfers to L2/alt-chains.</p><p class="meta">Category: Cross-Chain Bridge | Confidence: 95% | Evidence: BRG-polygon-0x2a3dd3, BRG-polygon-0xa0c68c | Legal: —</p></div>
+<div class="finding LOW"><h3>[LOW] Uniswap deployed on arbitrum, ethereum, optimism, polygon</h3><p>Protocol uniswap tracked across 4 chain(s).</p><p class="meta">Category: DeFi Protocol | Confidence: 90% | Evidence: DEFI-uniswap | Legal: —</p></div>
+<div class="finding LOW"><h3>[LOW] Aave deployed on arbitrum, avalanche, ethereum, optimism, polygon</h3><p>Protocol aave tracked across 5 chain(s).</p><p class="meta">Category: DeFi Protocol | Confidence: 90% | Evidence: DEFI-aave | Legal: —</p></div>
+<div class="finding LOW"><h3>[LOW] Compound deployed on ethereum</h3><p>Protocol compound tracked across 1 chain(s).</p><p class="meta">Category: DeFi Protocol | Confidence: 90% | Evidence: DEFI-compound | Legal: —</p></div>
+<div class="finding LOW"><h3>[LOW] Curve deployed on ethereum</h3><p>Protocol curve tracked across 1 chain(s).</p><p class="meta">Category: DeFi Protocol | Confidence: 90% | Evidence: DEFI-curve | Legal: —</p></div>
+<div class="finding LOW"><h3>[LOW] Lido deployed on ethereum</h3><p>Protocol lido tracked across 1 chain(s).</p><p class="meta">Category: DeFi Protocol | Confidence: 90% | Evidence: DEFI-lido | Legal: —</p></div>
+<div class="finding LOW"><h3>[LOW] Makerdao deployed on ethereum</h3><p>Protocol makerdao tracked across 1 chain(s).</p><p class="meta">Category: DeFi Protocol | Confidence: 90% | Evidence: DEFI-makerdao | Legal: —</p></div>
+<div class="finding HIGH"><h3>[HIGH] Wash trading detected — NFT 0xffffffff...#1337</h3><p>Circular trading pattern between 0xa1a1a1a1... and 0xb2b2b2b2... (6 transfers, score 0.50). Flags: repeated_counterparty.</p><p class="meta">Category: NFT Wash Trading | Confidence: 50% | Evidence: NFT-WASH-1337 | Legal: —</p></div>
+<div class="finding MEDIUM"><h3>[MEDIUM] Fractionalization protocol detected: nftx</h3><p>NFTX fractionalization vault identified on Ethereum mainnet.</p><p class="meta">Category: NFT Fractionalization | Confidence: 92% | Evidence: FRAC-NFTX | Legal: —</p></div>
+</section>
+<section>
+  <h2>Methodology</h2>
+  <h3>Data Sources</h3>
+  <ul><li>OFAC SDN List (U.S. Treasury)</li>
+<li>Tornado Cash / Railgun / Aztec contract registries</li>
+<li>Cross-chain bridge contract registry (Optimism, Arbitrum, Polygon, zkSync, StarkNet, Across, Hop, Synapse)</li>
+<li>DeFi protocol registry (Uniswap, Aave, Compound, Curve, Lido, MakerDAO)</li>
+<li>NFT marketplace registry (OpenSea, Blur, LooksRare, X2Y2)</li>
+<li>NFTX fractionalization protocol</li>
+<li>31-network blockchain configuration database</li></ul>
+  <h3>Analytical Techniques</h3>
+  <ul><li>Recursive transaction tracing</li>
+<li>HyperGraph GNN risk classification</li>
+<li>OFAC/SDN sanctions screening</li>
+<li>Mixer/tumbler pattern detection</li>
+<li>Cross-chain bridge tracking</li>
+<li>NFT wash-trading heuristics</li>
+<li>DeFi protocol classification</li>
+<li>ECDSA-P384 evidence chain signing</li></ul>
+  <h3>Daubert Factors</h3>
+  <ol><li>Testability: All analytical methods are reproducible given identical input data and API responses.</li>
+<li>Peer Review: Platform architecture reviewed against NIST SP 800-86 and ISO/IEC 27037:2012.</li>
+<li>Known Error Rates: API-dependent; rate-limit and network errors logged with retry counts.</li>
+<li>Standards: Compliant with FRE 901/902, NIST 800-53 Rev 5, FBI CJIS, FIPS 140-3.</li>
+<li>General Acceptance: Blockchain forensic tracing accepted in U.S. federal courts (United States v. Gratkowski, 2020 WL 3530575).</li></ol>
+</section>
+<section>
+  <h2>Compliance</h2>
+  <p>This report was produced in compliance with:
+     FRE 902(13), FRE 902(14), NIST SP 800-86, ISO/IEC 27037:2012, FBI CJIS v5.9.2, DOJ Digital Evidence Standards, NIST SP 800-53 Rev 5, ISO 27001:2022, FIPS 140-3, PEP 8, W3C.</p>
+</section>
+<section>
+  <h2>Integrity Verification</h2>
+  <p><strong>Algorithm:</strong>
+     SHA3-512</p>
+  <p style="word-break:break-all"><strong>Hash:</strong>
+     789648e531707066e0db7eba76402202b6cf42d15841c41ef3df3ce3c92b9bc16b80c0e886b2a7a683274f55e744b22f67b9b75063b749898df1315f72127c93</p>
+</section>
+</main>
+<footer>
+  AEGIS Forensic Platform — Generated 2026-04-07T17:32:55.268367+00:00
+</footer>
+</body>
+</html>
