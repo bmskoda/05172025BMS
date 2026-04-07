@@ -1,0 +1,374 @@
+{
+  "chain_of_custody": [
+    {
+      "evidence_id": "EVID_CDC6EF492325",
+      "source_system": "PlatformAudit",
+      "endpoint_uri": "/capability",
+      "payload_hash": "3d8c2cd9d43e2c38fffff8e847bc4ca7bae6bb9898655805914749fb8a44480897a0bb72be58d910357f4e675ed68f052406b14d2af0ec3acc3dd404997da3ba",
+      "previous_chain_hash": null,
+      "ingested_utc": "2026-04-07 17:40:34.843612+00:00",
+      "chain_position": 0,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_F83FB0134643",
+      "source_system": "InternalValidation",
+      "endpoint_uri": "chain/verify",
+      "payload_hash": "e64ea48507248dc4bf25a37ca95e4ad6423f6a0dfc1e738095c785e87b3a38c1d805fbd7739d2b245a84c9d642ff64b7fe54a99fc21648795814a6d0b37e30ca",
+      "previous_chain_hash": "2536d556251ad92c029e07f66e351788d609fff1418f7fbfd40627f48e6ab05429c3e767f25ff399268380108373a43e2d36581bcb484799ab4d39f30e754dfc",
+      "ingested_utc": "2026-04-07 17:40:35.226665+00:00",
+      "chain_position": 1,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_BAE9827E1514",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "ad0f68f2f3e418dfbee016992dcbba746c377ac683d2a7f696b592b1f838258684f4d2428448d7918080884b4945bfca3c082f3f6ba0e9e7d8d33295f43ac10d",
+      "previous_chain_hash": "a319b494078343156e641c56dc70063454bc0ee4cc65b0805050f97168b7fac4e54ad3bc63b1041ce1940fc12f876ff43d98f030505ba1940467278203c1ecc9",
+      "ingested_utc": "2026-04-07 17:40:35.228139+00:00",
+      "chain_position": 2,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_3A52046AB25F",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "d938489e89772ccce21bcb7e939619114c217550d7aff51f6ed60517e95d4683fa067b933a92ef5b52dbced5b993d1f1e1b8873981b97c09f0e269ae5ec28ced",
+      "previous_chain_hash": "43ea6e7ff6658c8c4e50b3ff99390ac9c2e115b20ba6d9e2cb9c1d3eccaf898baea5be4864b382830e5611b2ab7261161ae640900acaa7fecc240fb6d7380573",
+      "ingested_utc": "2026-04-07 17:40:35.228192+00:00",
+      "chain_position": 3,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_0C5D18A82A30",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/tron",
+      "payload_hash": "36b8ac4428903d46fe9a476cd2be482c6f3818f3cbae8883e91af1573b901465e7f1241e5a1e4c5a9fc29d80bf6d018f1d09e97907f8b28f7161ee9ef49b2373",
+      "previous_chain_hash": "5c7f0009ea631b4fcc63f0253c904890c2b49851ddb797ae3267e518626fc4afb00f1277dd85241c2f8243cc4277d8d9701780e7a66b07d1ddc9b8b89d96e56e",
+      "ingested_utc": "2026-04-07 17:40:35.228233+00:00",
+      "chain_position": 4,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_C027272A52CF",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "9aba6b986c78855a7ea8d10c16a19c226fe65b30ec4117490c388de37e91ae50d2eede0a7647dcb992f4590db1176bf1dac28e5f74ce9f5c58a209b051e5cfd8",
+      "previous_chain_hash": "3a8a3f3c0ea484b40a8d46310c516b69234fa8470f20e4292701314920cb58550d2bbfdf729484a8a787c5cc55c5b84e6ebfc402e5f5e98602c99e9b1bc7c5bd",
+      "ingested_utc": "2026-04-07 17:40:35.228273+00:00",
+      "chain_position": 5,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_B51CC5938ED8",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/bsc",
+      "payload_hash": "5d5d727663ad42d855198b144cb865ff2b98820941a299d179b720fe53ff961db3323d9cb182d4e048abed8239cf58788660edbdf317e5f6c129751e6366d084",
+      "previous_chain_hash": "1fecf3aa9e7e265ad76a2ea245f91655d259a491ddafb25719d5476b7d3e58ad4de4a58583e436ca140b3b7793d611a73de96992eb34901deccaaeed4bd6e80e",
+      "ingested_utc": "2026-04-07 17:40:35.228317+00:00",
+      "chain_position": 6,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_372D19AE534F",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/polygon",
+      "payload_hash": "ad5ae30be7d40719ef56724f660fe703c25def091cac632ff9d7d9db1b964f1cce8849fce375bd0a849828d12bab047e1033c76b0db71e4a26beb021780236b1",
+      "previous_chain_hash": "226a3eec95d3776ab71090a622ce5626fda9d009e1363e6e0a600352c2a15554ed2a33a623d27b204aef7c434c7eacf8dd94e2f95ddbe1a29cf1e605d01069e1",
+      "ingested_utc": "2026-04-07 17:40:35.228354+00:00",
+      "chain_position": 7,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_F7C942464C94",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/arbitrum",
+      "payload_hash": "0bb8ae88118d94f00836fa5814669f576538267ecedfc83ee521850fea41143b5c0472c09fd128853f61d6f7f926d34beda386ae97336bab7fb44cc906589104",
+      "previous_chain_hash": "c0599ad35ead55bd51aafa47b645dafa5495c794f3adf48beb5022572e6897f0ab7ff54c085871f45c1bbf472c5c7d875093fa2d53bc4792021412631f9cb2cf",
+      "ingested_utc": "2026-04-07 17:40:35.228387+00:00",
+      "chain_position": 8,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_E36EB5531E3F",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/optimism",
+      "payload_hash": "4a55a90c0c1594a36efb70a7e2c265117a6faeaf3efd20b459ecda719f2c4bc7b080c1a8106a2688f7fcf2856c7c8fda4845ee84db3b831f956d53c1bc28434d",
+      "previous_chain_hash": "500a498ce793473ffc854970c145a5eccc51ba122f4cf07377a0989a324c6c8d10c0e2c999ca964e1612dcfd8191d6da6d993159f0321da5258877e13b7d932f",
+      "ingested_utc": "2026-04-07 17:40:35.228422+00:00",
+      "chain_position": 9,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_F6182092604B",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "ec070d206283d3d2254f7152f47653e3885869260d83a469cbf8347c877068f899f4b656b940b179e1c721c807191b98c554be0728dddc534cdcf3650fc71d60",
+      "previous_chain_hash": "d84778865649b4e20d14812ced57d70f07c2ad7ad083a29491bb56a5eb4da533599985f53fe5627ac5efaa4b94b48809570b6a106a75f3720278cc4312626c1b",
+      "ingested_utc": "2026-04-07 17:40:35.228461+00:00",
+      "chain_position": 10,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_9525F8B4A90B",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/bsc",
+      "payload_hash": "e084b6ceb87fea95885c3b55a6991916ec9d029ebf07a2a3c767661800308e95ad88be3b52c3e55ae1d42473c2c94dcb01e149fb1065c394a59065164d66a775",
+      "previous_chain_hash": "4a1af6119f6719dc435c359a9462beb96d7d74f0c94ff30f61eeb274b631cc7b3bba575e7db3ee0822b3a7ec36e3c4d96fbef7df9b28e5b0186ab55c270a7650",
+      "ingested_utc": "2026-04-07 17:40:35.228496+00:00",
+      "chain_position": 11,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_39F81FCAA868",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/polygon",
+      "payload_hash": "cbf7d09929e49f9b83d17ea15caf6a92ad9d1fece54e058388f6833d2d21672540146a81c29912a19245a58367a705d1c5c5769bc753cf142e1e1eb2ebbd12e0",
+      "previous_chain_hash": "de2744349379b98338bb3b0f1e3abc11a5f9050283d3e958487ea7f4d27b83c6d7f3beb6270cfe8c1221915125fb3a1d8a913e9ef41a424d18442fdebbcf3431",
+      "ingested_utc": "2026-04-07 17:40:35.228528+00:00",
+      "chain_position": 12,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_14D8C4E1B7B2",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "469e9c93a134992f1f38b2538fba2ad3af29faa6dd47e89e98d2de63f00665832d99660c5ec152fa019a7f9c7498da8c24f3819741fc0c3962121e085a9b97b4",
+      "previous_chain_hash": "a936747fddda71ed3e7aac3d918888c3f1bad900fb78c265ea598088fb6225429fc96d2b2b7663e70c08f761f234848529ecf0d6a4a218a15ac01e300d5d97ab",
+      "ingested_utc": "2026-04-07 17:40:35.228569+00:00",
+      "chain_position": 13,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_777890680F40",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/polygon",
+      "payload_hash": "9da49c45df15f9155ae0e5f03c50450abdee085a702954ba7ba140bb4b3bb3bea4d05b84a81f8f030e1d819e6c5d8aa128c54b7d42e1d18936ceb36d2cca13a1",
+      "previous_chain_hash": "f2f31fc59a2f7b600be7812e3756ab289f16734f58ca2b77f2fe767317af900cf8d16108376ddfd53fcd1b9e3d6484cd14f210f01adf39d664f47a076e65d6ca",
+      "ingested_utc": "2026-04-07 17:40:35.228601+00:00",
+      "chain_position": 14,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_869648423EF7",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/arbitrum",
+      "payload_hash": "44e57413e869d9d3eafbc775c96cddc219776bc10134589ffce8183e75a5286d714b3ee58b7908e745b71a9d646ec8a6d26326bc978cbb60fbb875fa58984cee",
+      "previous_chain_hash": "c46a8cc08b7e7f41d6922801b44e00c221c08d1abbb19ba7e17d9c9df128744de2f223f7a70ee000e4d17616d042d1d0e99def8bcbcc534180b39cdb5efb401a",
+      "ingested_utc": "2026-04-07 17:40:35.228631+00:00",
+      "chain_position": 15,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_31298FEDE446",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/optimism",
+      "payload_hash": "c1c1711219abd7a872ec44908e3d54a4568b10d3227255b4bc38051babf243ddbe6a2538d6f7fb04ab5727f3f577aef15c60284418222aa2e9b1f5e5dbe2846f",
+      "previous_chain_hash": "a749f1c23786c22b3a6e24474bb7f56b84cbd48e0f8e7240fd863d58427ac88fb6e23dd211a9f6b664fe26ae9df3a33cddacde1f71803e16bb322f06ceee49c9",
+      "ingested_utc": "2026-04-07 17:40:35.228660+00:00",
+      "chain_position": 16,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_211ECFF4D15D",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "1c09c01aede8c2b92223c9bc14e5097de59249da50a3b7eb2dbab0b9c2e2214f19d3121df29d5cf2115a5a3492a6ea2eb0fc3ec6dffe886b5d106da0663cb4ba",
+      "previous_chain_hash": "3a32ca6d281687724da7bb55615f7944d768a0fc65c8f01b7914419abde874100eb70db12522b2fd846c970a273d3d0fdcd82cd7f609ac5a44c958d5ef87d2e4",
+      "ingested_utc": "2026-04-07 17:40:35.228690+00:00",
+      "chain_position": 17,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_8C091FF2DD63",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/polygon",
+      "payload_hash": "b9a28d31471bdb4e0f2c3267df103fc9343374f09458b72813472a41d7b306b539c1be7428b4afb0172e128a472a4b9c0e8fea440d97c2681932225724bbc6dd",
+      "previous_chain_hash": "2c39f1be760ca8fb5ae9860ceace719b0c3be6f420243ff03556c4c294a05c47e0e0a3c3b0dd3558b9357c1afa890ce660385d6cab51e72268edd08f550388d5",
+      "ingested_utc": "2026-04-07 17:40:35.228723+00:00",
+      "chain_position": 18,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_12EF34318636",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/arbitrum",
+      "payload_hash": "a7209663ac48afb74ac4fd31101f4583ff2a349826d00a216791ae1132489f4fe287324a2a67a2ec6ef0262390f83cbcc1c02b1088dcb737bbed74f471322c25",
+      "previous_chain_hash": "67854b94e9ac7bd7815673db26f4a3bcd16aa3adfea29723352b22fcc49d8dd8faaa42fb07b33f6881836d96b0410cf89e70f2527e6a47e319a5547b2f697e44",
+      "ingested_utc": "2026-04-07 17:40:35.228755+00:00",
+      "chain_position": 19,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_E188E434BED1",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/optimism",
+      "payload_hash": "939030b99eaddf5974c4c4ada87f866f22cac9281cfb9a21c78fbe0949c00f81c17ca214e4f54586ade2d24d864193a48764673e5ed062232e7815be112da84e",
+      "previous_chain_hash": "0baad548fb123edf1784f25bce93d3a83a7002f1c8017eace78ca2cda98381700c64c11cd87b3eb5d4da66c0c6d6c1e3b2b1336a9b770e9cc0cd45dc7b994c0c",
+      "ingested_utc": "2026-04-07 17:40:35.228786+00:00",
+      "chain_position": 20,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_22129B05BE88",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/avalanche",
+      "payload_hash": "9965b961028e669d27c49d6a09ee18c85414c454e5c58fb951ccc6cd53dd03ec1acaca42b0105c2b9096dfd0a1280d7858081d8320361ff310f16eeda533cf47",
+      "previous_chain_hash": "afc4a068ad05233d32296aa8941e4246652b7bf6737942b690d04201b39315f72956b30c577ae259a4c6c98a904685d297e67cabfc0a303675cb269d42c8d776",
+      "ingested_utc": "2026-04-07 17:40:35.228817+00:00",
+      "chain_position": 21,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_25F2963AC4E4",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "321969aac549c486161c6519454ac48e1dd56ad632677e79e4239fb89ddb3699bf7b5494fb053cd051e042383e8d9174b7c2c7bea38fe6f5436e0bb4c04c94d6",
+      "previous_chain_hash": "59dffcc1911267cf187a53f78d87e0e3391fc7e07106513b7029b84b618e2dfbf8a46530151e9aa832784fb958329400064557faf217f55f7bbcdf4af6612713",
+      "ingested_utc": "2026-04-07 17:40:35.228848+00:00",
+      "chain_position": 22,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_1C47672815A5",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "673809a84e507dbe3ab4ae0d16f5971104d0f957206d41d3d0fa3a53bcf290ec51cdaf831d3ffab83f4dba7c31d4c82f6cc340c306911c57d61a59fd253ec38b",
+      "previous_chain_hash": "d6ff364734a0fda233de7f18274d1c9b175e49750e03514336f1f4029134574616e7eba059262ace5a2c9e63d07bb10996cafffc180edad53b9513b49e57f17e",
+      "ingested_utc": "2026-04-07 17:40:35.228877+00:00",
+      "chain_position": 23,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_20868F6669BF",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "d483453f125a970005dfdf6d9c3bf401c3b29d23ea41fe4a670c12d5a72cd54be91d2d80c37f50148674f4cb1b19273f1b690c817d77d28c9630616d7dc21332",
+      "previous_chain_hash": "0ee565fd8f33a3a068b51066ade61e96b5f235d9ffb5245cb0bae1bde2f4ac9fcd44873a568d61c2d659ee0d95fed5a8259951cc7bff5a5f1347271d519be7d9",
+      "ingested_utc": "2026-04-07 17:40:35.228911+00:00",
+      "chain_position": 24,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_04584C44B3F0",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "88010b5131475a70e728df82eb5b6dcea9d83d09caf79f7738f0736f86987672561ced55eb228f2c26861795e34a836220a7cd715fad8ffab089686364c3f5f5",
+      "previous_chain_hash": "98f62b5e92ca6ab03752d2e441b4d977020127aac0e99810d6b0568ac7c346f8efce77f4fc5db4f9c9ebf905b478d95f86c11b0e3c941677ed7102b1fdbfc1d4",
+      "ingested_utc": "2026-04-07 17:40:35.228956+00:00",
+      "chain_position": 25,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_FC4BA376BC68",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "78e6c560e4ecdd60a0fda82522d8a8eddc68fc1449cfb19dc89f4479b9556c60b846fc91566f716a33f1e251862ea8a963cb8692798144b7cddebb69747257fb",
+      "previous_chain_hash": "fae09ca40f1e75c8709cc2324b0af00ded4cbb0caee9a4f5afcf3714ebae02e3238a6e6612f533b1862f987d9788b8e87022d979276d1bb7768818d5738e884d",
+      "ingested_utc": "2026-04-07 17:40:35.228992+00:00",
+      "chain_position": 26,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_D98A3311F54D",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "8de6e25d67392f1a4a73d81ccc2146b79968690f4861db99364aaa90ac09c5d6066a2b79ede79f74bf66303833dd5106c5c427c641565aea8c92a2d3d044bd22",
+      "previous_chain_hash": "7f57b2687dba3ba2a0e5a1ab7fb968a46b34b91beab3fab666faf7f098d41f6b9f45d0e37f63d8cc55f657b4825a566d75eea1cbc8beedeb05e4bf464e1edcd5",
+      "ingested_utc": "2026-04-07 17:40:35.229022+00:00",
+      "chain_position": 27,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_16556A6F3E54",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "02c96e6397345bde06d843c7408597fea41606a56f950eea1e110624ed9a4b3d56cf5237e705a717f787e919740f19f6415341211736010afff44f0c00c41ff5",
+      "previous_chain_hash": "7af571d31b6ef822dd74a5c4be39be5b49bc4101da791870fec7cb57f44021c107e2f04915c31d2e86a9edc5cf7ecb80389cbca0df03d440d458c87b7b95e4a7",
+      "ingested_utc": "2026-04-07 17:40:35.229055+00:00",
+      "chain_position": 28,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_2187E11F8481",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "7b31c1dc8bdb5d3bdab059c130c467a94ec473d968d2fdaeb905f9692db9f138b33781cca3e4f03f7eb63285dae0997414976d34ce669a89e789678c1e1f6d5d",
+      "previous_chain_hash": "f38a889ffcf3a29566c0db612a6656dcb69bba34e585e5295c1fc059ac3a8f74a50592485944de40ad19da807a2742eb2d3ebd62d19b7842aab4446ce83e175e",
+      "ingested_utc": "2026-04-07 17:40:35.229085+00:00",
+      "chain_position": 29,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_4F9A834B9377",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/polygon",
+      "payload_hash": "8b8e62f52ca6c7b0fbe2f7b47860b74a7e165f0d9f101f16f9a08952c3cecc6af16e83689713ba94c78c45096e887d8f1d3e5dd7b63a2bdadd761cee87e36883",
+      "previous_chain_hash": "9a2838e3ba0b0422fb1035e95687f6bcebfd3ea2217e74d2834a4b320c4a0bbfab766f769b951bb76a8f0a19cc628954e486ff77583e3653018e7e15be64bb08",
+      "ingested_utc": "2026-04-07 17:40:35.229117+00:00",
+      "chain_position": 30,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_34DE2F68A801",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "9cd989954b3b313a74bb9c1e3642282c711e3eb7387640289a85be3f7dbddb8437ec5c4b52b138ee969c8eafdfa2a4410ec2f8728d7219486ae272b61e268b96",
+      "previous_chain_hash": "5901bb1580c154913b25eec321673ec79ee81f71ddaa8d593759d2b65ab55d12793ca3589313d34483295ec5ca36b4177aa3fe605b7ed710c9c812812f628ebb",
+      "ingested_utc": "2026-04-07 17:40:35.229150+00:00",
+      "chain_position": 31,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_6301DAB780B8",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "713e6c885167b363401b7a24c58ee611c1aee961626644761b8cee9065bcdcd4d18420e1bdf17e531ba392919bdaa1cd79b714917936a9ba1d0e73da323ad736",
+      "previous_chain_hash": "fff8866341887a90d4af593b40e270bb865f58ea4f34c6c8493ffb276f99dd6ce6536f730c0090d0c14ddce9c6a2b84487bd632dd1442f9b2641744ea85252fd",
+      "ingested_utc": "2026-04-07 17:40:35.229184+00:00",
+      "chain_position": 32,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_734197D0BF03",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "ef0e78dea967d1bde39dff3d90138080a54ee17deb282ce90d59d33fccbddfa1769b47fcec2c53108333998f38efbd4c5b1366a42d8e067ead7c07bd05713618",
+      "previous_chain_hash": "53a4cc89a0c250d6e85020c00a140b2b71dc2b249e8ebba74f4e300196e46765a09c76ad0a3f9ad977ea0e94a059c649cebca42582853550936ebca701daccf8",
+      "ingested_utc": "2026-04-07 17:40:35.229214+00:00",
+      "chain_position": 33,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_C7DCD833F113",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "46794936f358ba4299fcadea16014d8c3e34cea859cd1eea4bd5efae6f05c09fdeeecc92503885fde8415e42f9a97b6c9b2c3de866f9cbd252c9cce7f0aeafb1",
+      "previous_chain_hash": "b4328560dc8e434b50a625e0724e57526b619666bc13d85fe36d62f43176ab51955da3428e93aff3feffa1cadedf4e9dca72284d04170884559df17dbc81b93c",
+      "ingested_utc": "2026-04-07 17:40:35.229243+00:00",
+      "chain_position": 34,
+      "metadata": {}
+    },
+    {
+      "evidence_id": "EVID_CDF94CDF85A0",
+      "source_system": "BlockchainAnalysis",
+      "endpoint_uri": "tx/ethereum",
+      "payload_hash": "2936dfc08bf59a1fa6d32b40628dd90c0252619630b17bf506ae4dd20a0b1b6423d9444fdc4294564a64f8c6bd7f826250017abccdcaf795282bd90f0117159b",
+      "previous_chain_hash": "2ac2614d2decb8696812cee63d66b5b5c8eb4058bb1363cbc7b3fd039a8980e056f4b1469687da0f36726f43ec2d85662f2ce512c259c3c0fce3778c7354fc13",
+      "ingested_utc": "2026-04-07 17:40:35.229272+00:00",
+      "chain_position": 35,
+      "metadata": {}
+    }
+  ],
+  "terminal_hash": "276e7b384f433a403ed2a2c42dfa010cb51861208bdd110d54ab89b1311dbafedd70f3a84b7d28d6f5a3aacd54186619dd0cb06b09c83e248d91a79df456a7b8",
+  "chain_length": 36,
+  "verification_status": true,
+  "export_timestamp": "2026-04-07T17:40:35.231132+00:00",
+  "standard_compliance": [
+    "NIST SP 800-86",
+    "ISO 27037:2012",
+    "FRE 902(13)",
+    "FIPS 180-4 (SHA3-512)"
+  ]
+}

@@ -6,34 +6,32 @@ AEGIS FORENSIC INTELLIGENCE PLATFORM — INVESTIGATION FINDINGS
 ======================================================================
 
 Investigation ID : AEGIS-INV-001
-Report ID        : RPT-DEC7334D69A848F1
+Report ID        : RPT-263EFAE2958D4E70
 Classification   : LAW ENFORCEMENT SENSITIVE
 Temporal Scope   : 1985-08-20 through 2026-04-07
 Platform Version : AEGIS v20.1.0
 
 SUMMARY
 ----------------------------------------------------------------------
-AEGIS platform analysis across 31 blockchain networks identified 20 forensic findings. Transaction classification covered 34 transactions: 4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean. Evidence chain sealed with 37 ECDSA-signed links (verified: True).
+AEGIS platform analysis across 31 blockchain networks identified 18 forensic findings. Transaction classification: 34 total — 4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean. Evidence chain: 36 SHA3-512 linked records, chain verified=True. Graph: 56 nodes, 34 edges.
 
 KEY METRICS
 ----------------------------------------------------------------------
-Total Findings          : 20
-Critical Findings       : 4
+Total Findings          : 18
+Critical Findings       : 2
 High-Severity Findings  : 6
-Average Confidence      : 92.6%
+Average Confidence      : 91.8%
 
 TOP FINDINGS
 ----------------------------------------------------------------------
-  - [CRITICAL] OFAC-listed address on ethereum
-  - [CRITICAL] OFAC-listed address on ethereum
-  - [CRITICAL] OFAC-listed address on ethereum
-  - [CRITICAL] OFAC-listed address on tron
-  - [HIGH] 7 mixer contract(s) catalogued on ethereum
-  - [HIGH] 1 mixer contract(s) catalogued on bsc
-  - [HIGH] 1 mixer contract(s) catalogued on polygon
-  - [HIGH] 1 mixer contract(s) catalogued on arbitrum
-  - [HIGH] 1 mixer contract(s) catalogued on optimism
-  - [HIGH] Wash trading detected — NFT 0xffffffff...#1337
+  - [CRITICAL] OFAC-sanctioned addresses on ethereum
+  - [CRITICAL] OFAC-sanctioned addresses on tron
+  - [HIGH] 7 mixer contract(s) on ethereum
+  - [HIGH] 1 mixer contract(s) on bsc
+  - [HIGH] 1 mixer contract(s) on polygon
+  - [HIGH] 1 mixer contract(s) on arbitrum
+  - [HIGH] 1 mixer contract(s) on optimism
+  - [HIGH] Wash trading detected — NFT #1337
 
 METHODOLOGY
 ----------------------------------------------------------------------
@@ -52,8 +50,8 @@ FRE 902(13), FRE 902(14), NIST SP 800-86, ISO/IEC 27037:2012, FBI CJIS v5.9.2, D
 INTEGRITY
 ----------------------------------------------------------------------
 Content Hash (SHA3-512):
-789648e531707066e0db7eba76402202b6cf42d15841c41ef3df3ce3c92b9bc16b80c0e886b2a7a683274f55e744b22f67b9b75063b749898df1315f72127c93
+efb3d41e224ba74e6bcfe373ce9cdc26ab2b732d1b8a7a56b4f80cc7d27449a76b1a4586ab9c3a2a62c74de2f7ecf88e4514b53dcd71613a05ce65071baf9b47
 
 ======================================================================
-AEGIS Forensic Platform — 2026-04-07T17:32:55.268996+00:00
+AEGIS Forensic Platform — 2026-04-07T17:40:35.230611+00:00
 ======================================================================

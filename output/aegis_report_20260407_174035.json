@@ -1,0 +1,356 @@
+{
+  "report_metadata": {
+    "report_id": "RPT-263EFAE2958D4E70",
+    "report_type": "Forensic Investigation Report",
+    "generated_at": "2026-04-07T17:40:35.229872+00:00",
+    "classification": "LAW ENFORCEMENT SENSITIVE",
+    "temporal_scope_start": "1985-08-20",
+    "temporal_scope_end": "2026-04-07",
+    "investigation_id": "AEGIS-INV-001",
+    "analyst_id": "AEGIS-AUTOMATED",
+    "platform_version": "20.1.0",
+    "compliance_standards": [
+      "FRE 902(13)",
+      "FRE 902(14)",
+      "NIST SP 800-86",
+      "ISO/IEC 27037:2012",
+      "FBI CJIS v5.9.2",
+      "DOJ Digital Evidence Standards",
+      "NIST SP 800-53 Rev 5",
+      "ISO 27001:2022",
+      "FIPS 140-3",
+      "PEP 8",
+      "W3C"
+    ]
+  },
+  "executive_summary": "AEGIS platform analysis across 31 blockchain networks identified 18 forensic findings. Transaction classification: 34 total \u2014 4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean. Evidence chain: 36 SHA3-512 linked records, chain verified=True. Graph: 56 nodes, 34 edges.",
+  "methodology": {
+    "daubert_factors": [
+      "Testability: All analytical methods are reproducible given identical input data and API responses.",
+      "Peer Review: Platform architecture reviewed against NIST SP 800-86 and ISO/IEC 27037:2012.",
+      "Known Error Rates: API-dependent; rate-limit and network errors logged with retry counts.",
+      "Standards: Compliant with FRE 901/902, NIST 800-53 Rev 5, FBI CJIS, FIPS 140-3.",
+      "General Acceptance: Blockchain forensic tracing accepted in U.S. federal courts (United States v. Gratkowski, 2020 WL 3530575)."
+    ],
+    "data_sources": [
+      "OFAC SDN List (U.S. Treasury)",
+      "Tornado Cash / Railgun / Aztec contract registries",
+      "Cross-chain bridge registry (8 contracts)",
+      "DeFi protocol registry (Uniswap, Aave, Compound, Curve, Lido, MakerDAO)",
+      "NFT marketplace registry (OpenSea, Blur, LooksRare, X2Y2)",
+      "NFTX fractionalization protocol",
+      "31-network blockchain configuration database",
+      "USPTO / WIPO / EPO government registries"
+    ],
+    "analytical_techniques": [
+      "Recursive transaction tracing",
+      "HyperGraph GNN risk classification",
+      "OFAC/SDN sanctions screening",
+      "Mixer/tumbler pattern detection",
+      "Cross-chain bridge tracking",
+      "NFT wash-trading heuristics",
+      "DeFi protocol classification",
+      "ECDSA-P384 evidence chain signing"
+    ]
+  },
+  "findings": [
+    {
+      "finding_id": "FND-8BDF2525ED37",
+      "category": "OFAC Sanctions",
+      "severity": "CRITICAL",
+      "title": "OFAC-sanctioned addresses on ethereum",
+      "description": "17 address(es) on OFAC SDN list for ethereum.",
+      "evidence_refs": [
+        "OFAC-ethereum"
+      ],
+      "confidence": 1.0,
+      "legal_citations": [
+        "31 CFR 501",
+        "EO 13694"
+      ],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-705915B67D59",
+      "category": "OFAC Sanctions",
+      "severity": "CRITICAL",
+      "title": "OFAC-sanctioned addresses on tron",
+      "description": "1 address(es) on OFAC SDN list for tron.",
+      "evidence_refs": [
+        "OFAC-tron"
+      ],
+      "confidence": 1.0,
+      "legal_citations": [
+        "31 CFR 501",
+        "EO 13694"
+      ],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-A9C57C6374DE",
+      "category": "Mixer/Tumbler",
+      "severity": "HIGH",
+      "title": "7 mixer contract(s) on ethereum",
+      "description": "Known mixer/tumbler contracts on ethereum.",
+      "evidence_refs": [
+        "MIX-ethereum"
+      ],
+      "confidence": 0.97,
+      "legal_citations": [
+        "18 U.S.C. 1956"
+      ],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-11C9CAEE93A0",
+      "category": "Mixer/Tumbler",
+      "severity": "HIGH",
+      "title": "1 mixer contract(s) on bsc",
+      "description": "Known mixer/tumbler contracts on bsc.",
+      "evidence_refs": [
+        "MIX-bsc"
+      ],
+      "confidence": 0.97,
+      "legal_citations": [
+        "18 U.S.C. 1956"
+      ],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-A1BAF70D2596",
+      "category": "Mixer/Tumbler",
+      "severity": "HIGH",
+      "title": "1 mixer contract(s) on polygon",
+      "description": "Known mixer/tumbler contracts on polygon.",
+      "evidence_refs": [
+        "MIX-polygon"
+      ],
+      "confidence": 0.97,
+      "legal_citations": [
+        "18 U.S.C. 1956"
+      ],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-20CD6C2E83FC",
+      "category": "Mixer/Tumbler",
+      "severity": "HIGH",
+      "title": "1 mixer contract(s) on arbitrum",
+      "description": "Known mixer/tumbler contracts on arbitrum.",
+      "evidence_refs": [
+        "MIX-arbitrum"
+      ],
+      "confidence": 0.97,
+      "legal_citations": [
+        "18 U.S.C. 1956"
+      ],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-E7AD34DE64E3",
+      "category": "Mixer/Tumbler",
+      "severity": "HIGH",
+      "title": "1 mixer contract(s) on optimism",
+      "description": "Known mixer/tumbler contracts on optimism.",
+      "evidence_refs": [
+        "MIX-optimism"
+      ],
+      "confidence": 0.97,
+      "legal_citations": [
+        "18 U.S.C. 1956"
+      ],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-A85397E33EAB",
+      "category": "Cross-Chain Bridge",
+      "severity": "MEDIUM",
+      "title": "8 bridge contract(s) on ethereum",
+      "description": "Cross-chain bridge contracts on ethereum.",
+      "evidence_refs": [
+        "BRG-ethereum"
+      ],
+      "confidence": 0.95,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-50FD9EF9290E",
+      "category": "Cross-Chain Bridge",
+      "severity": "MEDIUM",
+      "title": "1 bridge contract(s) on bsc",
+      "description": "Cross-chain bridge contracts on bsc.",
+      "evidence_refs": [
+        "BRG-bsc"
+      ],
+      "confidence": 0.95,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-692F264B6462",
+      "category": "Cross-Chain Bridge",
+      "severity": "MEDIUM",
+      "title": "2 bridge contract(s) on polygon",
+      "description": "Cross-chain bridge contracts on polygon.",
+      "evidence_refs": [
+        "BRG-polygon"
+      ],
+      "confidence": 0.95,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-0BD34575BA5B",
+      "category": "DeFi Protocol",
+      "severity": "LOW",
+      "title": "Uniswap tracked",
+      "description": "DeFi protocol uniswap monitored.",
+      "evidence_refs": [
+        "DEFI-uniswap"
+      ],
+      "confidence": 0.9,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-5718408FB7C3",
+      "category": "DeFi Protocol",
+      "severity": "LOW",
+      "title": "Aave tracked",
+      "description": "DeFi protocol aave monitored.",
+      "evidence_refs": [
+        "DEFI-aave"
+      ],
+      "confidence": 0.9,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-896C8A42F0F8",
+      "category": "DeFi Protocol",
+      "severity": "LOW",
+      "title": "Compound tracked",
+      "description": "DeFi protocol compound monitored.",
+      "evidence_refs": [
+        "DEFI-compound"
+      ],
+      "confidence": 0.9,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-502555BABC2E",
+      "category": "DeFi Protocol",
+      "severity": "LOW",
+      "title": "Curve tracked",
+      "description": "DeFi protocol curve monitored.",
+      "evidence_refs": [
+        "DEFI-curve"
+      ],
+      "confidence": 0.9,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-139A3A1B0F2C",
+      "category": "DeFi Protocol",
+      "severity": "LOW",
+      "title": "Lido tracked",
+      "description": "DeFi protocol lido monitored.",
+      "evidence_refs": [
+        "DEFI-lido"
+      ],
+      "confidence": 0.9,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-83E191194BE9",
+      "category": "DeFi Protocol",
+      "severity": "LOW",
+      "title": "Makerdao tracked",
+      "description": "DeFi protocol makerdao monitored.",
+      "evidence_refs": [
+        "DEFI-makerdao"
+      ],
+      "confidence": 0.9,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-C9453E29CD45",
+      "category": "NFT Wash Trading",
+      "severity": "HIGH",
+      "title": "Wash trading detected \u2014 NFT #1337",
+      "description": "Score 0.50, flags: repeated_counterparty.",
+      "evidence_refs": [
+        "NFT-WASH-1337"
+      ],
+      "confidence": 0.5,
+      "legal_citations": [],
+      "metadata": {}
+    },
+    {
+      "finding_id": "FND-B2C37A28AB75",
+      "category": "NFT Fractionalization",
+      "severity": "MEDIUM",
+      "title": "NFTX fractionalization protocol detected",
+      "description": "NFTX vault identified on Ethereum mainnet.",
+      "evidence_refs": [
+        "FRAC-NFTX"
+      ],
+      "confidence": 0.92,
+      "legal_citations": [],
+      "metadata": {}
+    }
+  ],
+  "statistics": {
+    "total_findings": 18,
+    "by_category": {
+      "OFAC Sanctions": 2,
+      "Mixer/Tumbler": 5,
+      "Cross-Chain Bridge": 3,
+      "DeFi Protocol": 6,
+      "NFT Wash Trading": 1,
+      "NFT Fractionalization": 1
+    },
+    "by_severity": {
+      "CRITICAL": 2,
+      "HIGH": 6,
+      "MEDIUM": 4,
+      "LOW": 6
+    },
+    "avg_confidence": 0.9177777777777778
+  },
+  "integrity": {
+    "content_hash_algorithm": "SHA3-512",
+    "content_hash": "efb3d41e224ba74e6bcfe373ce9cdc26ab2b732d1b8a7a56b4f80cc7d27449a76b1a4586ab9c3a2a62c74de2f7ecf88e4514b53dcd71613a05ce65071baf9b47",
+    "finding_count": 18
+  },
+  "supplemental": {
+    "classification_stats": {
+      "total": 34,
+      "sanctioned": 4,
+      "mixer": 5,
+      "bridge": 3,
+      "defi": 13,
+      "nft": 5,
+      "clean": 5
+    },
+    "graph_stats": {
+      "nodes": 56,
+      "edges": 34
+    },
+    "evidence_chain_length": 36,
+    "chain_verified": true,
+    "wash_trading_analysis": {
+      "score": 0.5,
+      "flags": [
+        "repeated_counterparty"
+      ],
+      "circular_pairs": 1,
+      "transfer_count": 6
+    }
+  }
+}

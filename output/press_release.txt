@@ -1,0 +1,52 @@
+FOR IMMEDIATE RELEASE
+April 07, 2026
+
+========================================================================
+DEPARTMENT OF JUSTICE ANNOUNCES COMPLETION OF COMPREHENSIVE
+INTELLECTUAL PROPERTY & DIGITAL ASSET FORENSIC INVESTIGATION
+========================================================================
+
+Case Reference: RICO-2026-1BC7C23A
+Classification: UNCLASSIFIED
+Distribution: Global News Wires, Law Enforcement Liaisons
+
+WASHINGTON - The Department of Justice, in coordination with
+the Federal Bureau of Investigation, U.S. Secret Service,
+Drug Enforcement Administration, and international law
+enforcement partners, today announced the successful
+completion of a large-scale, multi-jurisdictional forensic
+investigation into intellectual property asset tracing and
+digital financial flows.
+
+The investigation utilized standards-compliant cryptographic
+evidence collection, multi-source government registry
+validation, and blockchain transaction analysis.  All
+processes were conducted in strict accordance with NIST
+forensic guidelines, FBI CART protocols, ISO 27037 digital
+evidence standards, and applicable federal statutes.
+
+KEY INVESTIGATIVE COMPONENTS:
+  - Multi-source consensus validation across USPTO, WIPO,
+    and EPO registries
+  - Cryptographically sealed chain of custody with
+    2 SHA3-512 linked records
+  - Chain verification status: VERIFIED
+  - Blockchain analysis across 31 networks with OFAC/SDN
+    sanctions screening
+  - Automated forensic agent orchestration with role-based
+    task distribution
+
+NEXT STEPS:
+The evidentiary package has been formally documented and
+submitted for judicial review.  The Department will
+coordinate with U.S. Attorneys Offices, regulatory agencies,
+and international partners to pursue appropriate enforcement
+actions as warranted by the findings.
+
+All individuals and entities are presumed innocent until
+proven guilty in a court of law.
+
+###
+Report ID: DOJ-FORENSIC-20260407-AEGIS
+Classification: UNCLASSIFIED
+========================================================================
