@@ -15,11 +15,16 @@ import AgentSwarmPanel from './components/dashboard/AgentSwarmPanel';
 import InvestigationTimeline from './components/dashboard/InvestigationTimeline';
 import DataSourcesGrid from './components/dashboard/DataSourcesGrid';
 import ComplianceMatrix from './components/dashboard/ComplianceMatrix';
+import WipoJurisdictionMap from './components/dashboard/WipoJurisdictionMap';
+import IsinCusipPanel from './components/dashboard/IsinCusipPanel';
+import RegulatoryCapture from './components/dashboard/RegulatoryCapture';
+import ForensicReport from './components/dashboard/ForensicReport';
 
 const SECTIONS = [
-  'executive','network','leaders','financial','patents',
-  'blockchain','shellcorps','fentanyl','evidence',
-  'agents','timeline','sources','compliance',
+  'executive', 'network', 'leaders', 'financial', 'patents',
+  'wipo', 'isincusip', 'capture',
+  'blockchain', 'shellcorps', 'fentanyl', 'evidence',
+  'agents', 'timeline', 'sources', 'compliance', 'report',
 ];
 
 export default function App() {
@@ -69,6 +74,12 @@ export default function App() {
           <div className="section-divider" />
           <PatentAnalytics />
           <div className="section-divider" />
+          <WipoJurisdictionMap />
+          <div className="section-divider" />
+          <IsinCusipPanel />
+          <div className="section-divider" />
+          <RegulatoryCapture />
+          <div className="section-divider" />
           <BlockchainForensics />
           <div className="section-divider" />
           <ShellCorpMap />
@@ -84,6 +95,8 @@ export default function App() {
           <DataSourcesGrid />
           <div className="section-divider" />
           <ComplianceMatrix />
+          <div className="section-divider" />
+          <ForensicReport />
         </div>
       </main>
 

@@ -13,6 +13,10 @@ import {
   Database,
   CheckSquare,
   X,
+  Globe,
+  CreditCard,
+  AlertTriangle,
+  Scroll,
 } from 'lucide-react';
 
 export default function Sidebar({ isOpen, onClose, activeSection, onNavigate }) {
@@ -22,6 +26,9 @@ export default function Sidebar({ isOpen, onClose, activeSection, onNavigate }) 
     { id: 'leaders', label: 'RICO Leaders', icon: Users },
     { id: 'financial', label: 'Financial Flows', icon: DollarSign },
     { id: 'patents', label: 'Patent Analytics', icon: FileText },
+    { id: 'wipo', label: '194 WIPO Jurisdictions', icon: Globe },
+    { id: 'isincusip', label: 'ISIN / CUSIP Exposure', icon: CreditCard },
+    { id: 'capture', label: 'Regulatory Capture', icon: AlertTriangle },
     { id: 'blockchain', label: 'Blockchain Forensics', icon: Link },
     { id: 'shellcorps', label: 'Shell Corporations', icon: Building2 },
     { id: 'fentanyl', label: 'Fentanyl Disruption', icon: Skull },
@@ -30,6 +37,7 @@ export default function Sidebar({ isOpen, onClose, activeSection, onNavigate }) 
     { id: 'timeline', label: 'Investigation Timeline', icon: Calendar },
     { id: 'sources', label: 'Data Sources', icon: Database },
     { id: 'compliance', label: 'Compliance Matrix', icon: CheckSquare },
+    { id: 'report', label: 'Report & Press Release', icon: Scroll },
   ];
 
   const handleNav = (id) => {
