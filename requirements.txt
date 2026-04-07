@@ -1,0 +1,26 @@
+# AEGIS Forensic Platform — Python dependencies
+#
+# Core (required)
+aiohttp>=3.9
+
+# Optional — blockchain analytics
+# web3>=6.0
+
+# Optional — graph analysis
+networkx>=3.2
+
+# Optional — scientific computing
+numpy>=1.26
+
+# Optional — ML / GNN
+# torch>=2.2
+# torch-geometric>=2.5
+
+# Optional — quantum computing
+# pennylane>=0.35
+
+# Optional — data validation
+# pydantic>=2.5
+
+# Optional — crypto primitives
+# cryptography>=42.0
