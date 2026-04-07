@@ -1,8 +1,8 @@
 {
   "report_metadata": {
-    "report_id": "RPT-6515A7F9DF52457F",
+    "report_id": "RPT-897A3510935246C9",
     "report_type": "Forensic Investigation Report",
-    "generated_at": "2026-04-07T17:51:49.861061+00:00",
+    "generated_at": "2026-04-07T17:57:27.537230+00:00",
     "classification": "LAW ENFORCEMENT SENSITIVE",
     "temporal_scope_start": "1985-08-20",
     "temporal_scope_end": "2026-04-07",
@@ -54,7 +54,7 @@
   },
   "findings": [
     {
-      "finding_id": "FND-C20A71B88719",
+      "finding_id": "FND-298956EDBF9A",
       "category": "OFAC Sanctions",
       "severity": "CRITICAL",
       "title": "OFAC-listed address on ethereum",
@@ -70,7 +70,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-A2BAE94D97AC",
+      "finding_id": "FND-61AE172E6163",
       "category": "OFAC Sanctions",
       "severity": "CRITICAL",
       "title": "OFAC-listed address on ethereum",
@@ -86,7 +86,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-844BC2FC7D4A",
+      "finding_id": "FND-9DF7257F82F6",
       "category": "OFAC Sanctions",
       "severity": "CRITICAL",
       "title": "OFAC-listed address on ethereum",
@@ -102,7 +102,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-39E4A862AC40",
+      "finding_id": "FND-CAECD7CE90A9",
       "category": "OFAC Sanctions",
       "severity": "CRITICAL",
       "title": "OFAC-listed address on tron",
@@ -118,7 +118,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-4E147B0F4FE0",
+      "finding_id": "FND-BC3112552231",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
       "title": "7 mixer contract(s) catalogued on ethereum",
@@ -135,7 +135,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-0B9B8E2544D5",
+      "finding_id": "FND-0472F41A7A47",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
       "title": "1 mixer contract(s) catalogued on bsc",
@@ -150,7 +150,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-370B24732A19",
+      "finding_id": "FND-7BE1C008E40D",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
       "title": "1 mixer contract(s) catalogued on polygon",
@@ -165,7 +165,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-FC0AE8DE1DCC",
+      "finding_id": "FND-3497E94E0534",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
       "title": "1 mixer contract(s) catalogued on arbitrum",
@@ -180,7 +180,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-82B415D0ABB7",
+      "finding_id": "FND-B863EFD9BEBC",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
       "title": "1 mixer contract(s) catalogued on optimism",
@@ -195,7 +195,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-A93AC1EA6665",
+      "finding_id": "FND-EF6CBA00406C",
       "category": "Cross-Chain Bridge",
       "severity": "MEDIUM",
       "title": "8 bridge contract(s) tracked on ethereum",
@@ -210,7 +210,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-435E0B311D7C",
+      "finding_id": "FND-6063E45043F7",
       "category": "Cross-Chain Bridge",
       "severity": "MEDIUM",
       "title": "1 bridge contract(s) tracked on bsc",
@@ -223,7 +223,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-14D868E97879",
+      "finding_id": "FND-9312D6DBAB1A",
       "category": "Cross-Chain Bridge",
       "severity": "MEDIUM",
       "title": "2 bridge contract(s) tracked on polygon",
@@ -237,7 +237,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-19394954991A",
+      "finding_id": "FND-4FA147A48A17",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Uniswap deployed on arbitrum, ethereum, optimism, polygon",
@@ -250,7 +250,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-94A72B914D17",
+      "finding_id": "FND-296135A11D44",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Aave deployed on arbitrum, avalanche, ethereum, optimism, polygon",
@@ -263,7 +263,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-B255E2DA0E79",
+      "finding_id": "FND-57B33289A48A",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Compound deployed on ethereum",
@@ -276,7 +276,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-C1361B020DD9",
+      "finding_id": "FND-86FBF55D843D",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Curve deployed on ethereum",
@@ -289,7 +289,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-FFACF13B6E84",
+      "finding_id": "FND-ACEAB544C874",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Lido deployed on ethereum",
@@ -302,7 +302,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-16C1EF0DB18A",
+      "finding_id": "FND-72E664F1A106",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Makerdao deployed on ethereum",
@@ -315,7 +315,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-E9A7E8C5045F",
+      "finding_id": "FND-FD7D50FE3BB1",
       "category": "NFT Wash Trading",
       "severity": "HIGH",
       "title": "Wash trading detected \u2014 NFT 0xffffffff...#1337",
@@ -328,7 +328,7 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-1932EEE830B9",
+      "finding_id": "FND-C203502EB0F8",
       "category": "NFT Fractionalization",
       "severity": "MEDIUM",
       "title": "Fractionalization protocol detected: nftx",
@@ -361,7 +361,7 @@
   },
   "integrity": {
     "content_hash_algorithm": "SHA3-512",
-    "content_hash": "26dc835af6d724d9e0d14622a560d578e35580f85e006d8977307f2beb289dc6c4ceb6ecb9986f15b05dfcb3a20efe941bab7e48a480dadccfb1eae29496c966",
+    "content_hash": "d2329491e240a8e929e9bb5d6744c464095544094e419c068acd4d58458e465f7501174662a650c211fd2b0c5d48d3346f9dce5e97058cfb58d88bb39d97c353",
     "finding_count": 20
   },
   "supplemental": {

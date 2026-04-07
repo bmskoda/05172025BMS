@@ -1,0 +1,36 @@
+{
+  "chain_of_custody": [
+    {
+      "evidence_id": "EVID_B7AFD18CBFBC",
+      "source_system": "PlatformAudit",
+      "endpoint_uri": "/capability",
+      "payload_hash": "752b9b5e3404a7e2acd63e58d1b830f45823dae7694a1e30f6a7fe228935f69a622e9a6d5d5734c9e2efbeec4f7edbc2439c3879edb2317b76faefb9fff26a7a",
+      "previous_chain_hash": null,
+      "ingested_utc": "2026-04-07 17:57:42.886536+00:00",
+      "chain_position": 0,
+      "metadata": {},
+      "blockchain_anchor": null
+    },
+    {
+      "evidence_id": "EVID_A9FCBD5EFAB3",
+      "source_system": "InternalValidation",
+      "endpoint_uri": "chain/verify",
+      "payload_hash": "e64ea48507248dc4bf25a37ca95e4ad6423f6a0dfc1e738095c785e87b3a38c1d805fbd7739d2b245a84c9d642ff64b7fe54a99fc21648795814a6d0b37e30ca",
+      "previous_chain_hash": "86f3cc67e2661d15da19a3f6df09f1348ba37b2e280b3a65673b5a984876e509bc7b5170f944baad8b2c08b5ad4e00fa868eaf2201ade40f76af6b3726683f0a",
+      "ingested_utc": "2026-04-07 17:57:43.276334+00:00",
+      "chain_position": 1,
+      "metadata": {},
+      "blockchain_anchor": null
+    }
+  ],
+  "terminal_hash": "b9ff530f5c43e1f66201888345ff65763b296f6ea777cd00ea0ceff008ecfa831ec8eaaba0b1af4d8109da76fb4a92970a02f5cc0f0db92ef9795db67c7eaa56",
+  "chain_length": 2,
+  "verification_status": true,
+  "export_timestamp": "2026-04-07T17:57:43.277094+00:00",
+  "standard_compliance": [
+    "NIST SP 800-86",
+    "ISO 27037:2012",
+    "FRE 902(13)",
+    "FIPS 180-4 (SHA3-512)"
+  ]
+}

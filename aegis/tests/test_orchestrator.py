@@ -212,7 +212,7 @@ class TestForensicOrchestrator:
         stds = data["compliance_attestation"]["standards_met"]
         assert "NIST SP 800-53 Rev 5" in stds
         assert "ISO 27037:2012" in stds
-        assert "FRE 901/902" in stds
+        assert "FRE 902(13)-(14)" in stds
 
     @pytest.mark.asyncio
     async def test_forensic_report_content(self, tmp_path):

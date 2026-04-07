@@ -1,33 +1,35 @@
 {
-  "investigation_id": "RICO-2026-E415FAE0",
+  "investigation_id": "RICO-2026-3176AD49",
   "jurisdiction": "U.S. District Court / Multi-Jurisdictional",
   "chain_of_custody": {
     "chain_of_custody": [
       {
-        "evidence_id": "EVID_C7DF0B575ABD",
+        "evidence_id": "EVID_B7AFD18CBFBC",
         "source_system": "PlatformAudit",
         "endpoint_uri": "/capability",
-        "payload_hash": "dc0cad55634a79ad21f6a8bd4d5b195486bd25f8acca614e153b0234147a914191671c1759cbd404402364d052e973fc4fa1207a9ed196b199b8da002de8f112",
+        "payload_hash": "752b9b5e3404a7e2acd63e58d1b830f45823dae7694a1e30f6a7fe228935f69a622e9a6d5d5734c9e2efbeec4f7edbc2439c3879edb2317b76faefb9fff26a7a",
         "previous_chain_hash": null,
-        "ingested_utc": "2026-04-07 17:52:18.836222+00:00",
+        "ingested_utc": "2026-04-07 17:57:42.886536+00:00",
         "chain_position": 0,
-        "metadata": {}
+        "metadata": {},
+        "blockchain_anchor": null
       },
       {
-        "evidence_id": "EVID_15A41DAAF51C",
+        "evidence_id": "EVID_A9FCBD5EFAB3",
         "source_system": "InternalValidation",
         "endpoint_uri": "chain/verify",
         "payload_hash": "e64ea48507248dc4bf25a37ca95e4ad6423f6a0dfc1e738095c785e87b3a38c1d805fbd7739d2b245a84c9d642ff64b7fe54a99fc21648795814a6d0b37e30ca",
-        "previous_chain_hash": "e9a6f4d8fa777e6f5e4d585757b7922565ae0a047ea784891cfaa8cf7e1c3ba0837fe66713d333b9c4ae7a2cf288a01a2661d0a6cf901140f1786c1d986706a4",
-        "ingested_utc": "2026-04-07 17:52:19.210210+00:00",
+        "previous_chain_hash": "86f3cc67e2661d15da19a3f6df09f1348ba37b2e280b3a65673b5a984876e509bc7b5170f944baad8b2c08b5ad4e00fa868eaf2201ade40f76af6b3726683f0a",
+        "ingested_utc": "2026-04-07 17:57:43.276334+00:00",
         "chain_position": 1,
-        "metadata": {}
+        "metadata": {},
+        "blockchain_anchor": null
       }
     ],
-    "terminal_hash": "2e38fa03283b256e357de6572d3f5f9e300f5677239634d80779fcecb9b9fdf6c301695c18e637e5db4ed55b1da830d05506e9eb466e4ae5cd3e7da7ef9aada8",
+    "terminal_hash": "b9ff530f5c43e1f66201888345ff65763b296f6ea777cd00ea0ceff008ecfa831ec8eaaba0b1af4d8109da76fb4a92970a02f5cc0f0db92ef9795db67c7eaa56",
     "chain_length": 2,
     "verification_status": true,
-    "export_timestamp": "2026-04-07T17:52:19.210316+00:00",
+    "export_timestamp": "2026-04-07T17:57:43.276442+00:00",
     "standard_compliance": [
       "NIST SP 800-86",
       "ISO 27037:2012",
@@ -51,24 +53,32 @@
   "compliance_attestation": {
     "standards_met": [
       "PEP 8",
-      "W3C",
+      "W3C DID/VC 1.1",
       "NIST SP 800-53 Rev 5",
       "NIST SP 800-86",
+      "NIST SP 800-88",
       "NIST SP 800-92",
       "ISO 27001:2022",
       "ISO 27037:2012",
       "FISMA",
       "FIPS 140-3",
       "FIPS 180-4",
+      "DoD 5015.2",
+      "CMMC L2",
       "CJIS Security Policy",
-      "FBI CART Guidelines",
-      "DOJ CRM 1962",
+      "FBI CART v4",
+      "Secret Service ECTF",
+      "DEA DAT",
+      "DHS NPPD",
       "CISA EO-14028",
-      "FRE 901/902"
+      "DOJ CRM 1962",
+      "FRE 902(13)-(14)"
     ],
-    "cryptographic_method": "SHA3-512",
+    "cryptographic_method": "SHA3-512 / HMAC-SHA3-512",
     "chain_integrity": "VERIFIED",
+    "deterministic_execution": true,
     "review_status": "READY FOR JUDICIAL REVIEW"
   },
-  "generated_utc": "2026-04-07T17:52:19.210230+00:00"
+  "pipeline_version": "2.1.0-PROD",
+  "generated_utc": "2026-04-07T17:57:43.276358+00:00"
 }

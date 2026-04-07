@@ -1,24 +1,17 @@
 {
   "investigation_id": "AEGIS-INV-001",
-  "timestamp": "2026-04-07T17:52:18.819751+00:00",
-  "platform_version": "2.0.0",
-  "networks": 31,
-  "transactions": 34,
-  "findings": 18,
-  "evidence_chain_links": 36,
-  "chain_verified": true,
-  "graph": {
-    "nodes": 56,
-    "edges": 34
-  },
+  "timestamp": "2026-04-07T17:57:27.538212+00:00",
+  "elapsed_seconds": 0.056,
+  "phases_completed": 4,
+  "networks_analyzed": 31,
+  "transactions_classified": 34,
+  "findings_generated": 20,
+  "evidence_chain_links": 37,
+  "evidence_chain_verified": true,
   "output_files": {
-    "court_package": "output/court_package.json",
-    "forensic_report_doj": "output/forensic_report.txt",
-    "press_release_doj": "output/press_release.txt",
-    "report_json": "output/aegis_report_20260407_175219.json",
-    "report_html": "output/aegis_report_20260407_175219.html",
-    "report_press_release": "output/aegis_report_20260407_175219_press_release.txt",
-    "evidence_chain": "output/evidence_chain.json",
-    "manifest": "output/manifest.json"
+    "json": "output/aegis_report_20260407_175727.json",
+    "html": "output/aegis_report_20260407_175727.html",
+    "press_release": "output/aegis_report_20260407_175727_press_release.txt",
+    "evidence_chain": "output/evidence/evidence_AEGIS-INV-001.json"
   }
 }
