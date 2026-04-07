@@ -27,13 +27,13 @@ import uuid
 from abc import ABC, abstractmethod
 from collections import defaultdict
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from decimal import Decimal
 from enum import Enum, auto
-from functools import wraps
 from pathlib import Path
 from typing import (
-    Any, Callable, Dict, Final, List, Optional, Set, Tuple, Union,
+    Any, Callable, Dict, Final, List, Optional,
+    Set, Tuple, Union,
 )
 
 # ---------------------------------------------------------------------------
@@ -41,7 +41,6 @@ from typing import (
 # ---------------------------------------------------------------------------
 
 try:
-    import aiohttp
     from aiohttp import ClientSession, ClientTimeout, TCPConnector
     AIOHTTP_AVAILABLE = True
 except ImportError:
@@ -69,7 +68,7 @@ except ImportError:
     PYG_AVAILABLE = False
 
 try:
-    import networkx as nx
+    import networkx as nx  # noqa: F401
     NETWORKX_AVAILABLE = True
 except ImportError:
     NETWORKX_AVAILABLE = False
@@ -83,13 +82,13 @@ except ImportError:
     CRYPTO_AVAILABLE = False
 
 try:
-    from cachetools import TTLCache, LRUCache
+    from cachetools import TTLCache, LRUCache  # noqa: F401
     CACHETOOLS_AVAILABLE = True
 except ImportError:
     CACHETOOLS_AVAILABLE = False
 
 try:
-    from web3 import Web3
+    from web3 import Web3  # noqa: F401
     from eth_utils import to_checksum_address, is_address
     WEB3_AVAILABLE = True
 except ImportError:
@@ -1495,9 +1494,10 @@ class BlockchainMonitor:
 
     async def _poll_chain(self, blockchain: str) -> None:
         while self.is_running:
+            default_net = BLOCKCHAIN_NETWORKS["ethereum"]
+            net = BLOCKCHAIN_NETWORKS.get(blockchain, default_net)
             await asyncio.sleep(max(
-                BLOCKCHAIN_NETWORKS.get(blockchain, BLOCKCHAIN_NETWORKS["ethereum"]).block_time_seconds,
-                5,
+                net.block_time_seconds, 5,
             ))
 
     async def _trigger_alert(self, tx: BlockchainTransaction, reason: str) -> None:
@@ -1541,9 +1541,15 @@ class TransactionTracingEngine:
         self._traced: List[BlockchainTransaction] = []
         self._graph = TransactionGraphBuilder()
         self._scorer = RiskScorer()
-        self._stats = {"txs_traced": 0, "addrs_found": 0, "mixers": 0, "bridges": 0, "depth": 0}
+        self._stats = {
+            "txs_traced": 0, "addrs_found": 0,
+            "mixers": 0, "bridges": 0, "depth": 0,
+        }
 
-    async def trace(self, address: str, blockchain: str, direction: str = "both") -> Dict[str, Any]:
+    async def trace(
+        self, address: str, blockchain: str,
+        direction: str = "both",
+    ) -> Dict[str, Any]:
         self._visited_txs.clear()
         self._visited_addrs.clear()
         self._traced.clear()
@@ -1689,11 +1695,18 @@ class EvidenceChainManager:
             else:
                 if link.previous_hash != chain[i - 1].content_hash:
                     return False
-            sig_payload = f"{link.evidence_id}:{link.content_hash}:{link.previous_hash}".encode()
+            sig_payload = (
+                f"{link.evidence_id}:{link.content_hash}"
+                f":{link.previous_hash}"
+            ).encode()
             if CRYPTO_AVAILABLE and self._signing_key:
                 try:
                     raw_sig = base64.b64decode(link.signature)
-                    self._signing_key.public_key().verify(raw_sig, sig_payload, ec.ECDSA(hashes.SHA384()))
+                    pubkey = self._signing_key.public_key()
+                    pubkey.verify(
+                        raw_sig, sig_payload,
+                        ec.ECDSA(hashes.SHA384()),
+                    )
                 except Exception:
                     return False
             else:
@@ -1787,7 +1800,10 @@ class BlockchainForensicsEngine:
             return client
         return None
 
-    async def analyze_address(self, address: str, blockchain: str, trace_depth: int = 3) -> Dict[str, Any]:
+    async def analyze_address(
+        self, address: str, blockchain: str,
+        trace_depth: int = 3,
+    ) -> Dict[str, Any]:
         logger.info("Analyzing %s on %s", address, blockchain)
         result: Dict[str, Any] = {
             "address": address, "blockchain": blockchain,
@@ -1854,7 +1870,10 @@ class BlockchainForensicsEngine:
 def validate_address(address: str, blockchain: str) -> bool:
     if not address:
         return False
-    evm_chains = {"ethereum", "polygon", "bsc", "arbitrum", "optimism", "base", "avalanche", "fantom", "harmony"}
+    evm_chains = {
+        "ethereum", "polygon", "bsc", "arbitrum",
+        "optimism", "base", "avalanche", "fantom", "harmony",
+    }
     if blockchain in evm_chains:
         if WEB3_AVAILABLE:
             return is_address(address)

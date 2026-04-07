@@ -41,17 +41,12 @@ from abc import ABC, abstractmethod
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from enum import Enum, auto
-from functools import wraps
+from enum import Enum
 from typing import (
     Any,
-    Callable,
     Dict,
     List,
     Optional,
-    Set,
-    Tuple,
-    Union,
 )
 
 # ---------------------------------------------------------------------------
@@ -60,39 +55,21 @@ from typing import (
 
 try:
     import aiohttp
-    from aiohttp import ClientSession, ClientTimeout, TCPConnector
-
     AIOHTTP_AVAILABLE = True
 except ImportError:
     AIOHTTP_AVAILABLE = False
 
 try:
-    import httpx
-
-    HTTPX_AVAILABLE = True
-except ImportError:
-    HTTPX_AVAILABLE = False
-
-try:
-    from huggingface_hub import InferenceClient, AsyncInferenceClient
-
+    from huggingface_hub import AsyncInferenceClient
     HF_HUB_AVAILABLE = True
 except ImportError:
     HF_HUB_AVAILABLE = False
 
 try:
     from openai import AsyncOpenAI
-
     OPENAI_AVAILABLE = True
 except ImportError:
     OPENAI_AVAILABLE = False
-
-try:
-    from transformers import AutoTokenizer
-
-    TRANSFORMERS_AVAILABLE = True
-except ImportError:
-    TRANSFORMERS_AVAILABLE = False
 
 
 logger = logging.getLogger("AEGIS.AgentTeam")
@@ -335,7 +312,7 @@ class VLLMBackend(ModelBackend):
             )
         if self._session is None or self._session.closed:
             self._session = aiohttp.ClientSession(
-                timeout=ClientTimeout(total=300),
+                timeout=aiohttp.ClientTimeout(total=300),
             )
         return self._session
 
@@ -508,7 +485,7 @@ class HuggingFaceBackend(ModelBackend):
             elif AIOHTTP_AVAILABLE:
                 if self._session is None or self._session.closed:
                     self._session = aiohttp.ClientSession(
-                        timeout=ClientTimeout(total=300),
+                        timeout=aiohttp.ClientTimeout(total=300),
                     )
                 api_url = (
                     self.endpoint_url

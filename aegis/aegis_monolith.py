@@ -65,51 +65,36 @@ from __future__ import annotations
 # STANDARD LIBRARY IMPORTS
 # =============================================================================
 
-import abc
 import argparse
 import asyncio
 import base64
-import binascii
 import hashlib
 import hmac
-import inspect
 import json
 import logging
 import logging.handlers
 import math
-import multiprocessing
 import os
-import pickle
-import platform
 import random
 import re
-import secrets
 import signal
-import sqlite3
-import ssl
 import string
-import struct
-import subprocess
 import sys
 import threading
 import time
 import uuid
 import warnings
 from abc import ABC, abstractmethod
-from collections import defaultdict, deque
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
-from contextlib import asynccontextmanager, contextmanager
-from dataclasses import dataclass, field, asdict
-from datetime import datetime, timedelta, timezone
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP, getcontext
+from collections import defaultdict
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from decimal import Decimal, ROUND_HALF_UP, getcontext
 from enum import Enum, auto
-from functools import lru_cache, partial, wraps
-from pathlib import Path
+from functools import wraps
 from typing import (
-    Any, Callable, Coroutine, Dict, Final, Generic, List, Optional, Protocol,
-    Set, Tuple, TypeVar, Union, cast, runtime_checkable, AsyncIterator
+    Any, Callable, Dict, Final, List, Optional,
+    Set, Tuple, Union,
 )
-from urllib.parse import urlencode, urljoin, urlparse, parse_qs, quote
 
 getcontext().prec = 369
 
@@ -121,31 +106,10 @@ warnings.filterwarnings('ignore', category=DeprecationWarning)
 # =============================================================================
 
 try:
-    import aiohttp
     from aiohttp import ClientSession, ClientTimeout, TCPConnector
     AIOHTTP_AVAILABLE = True
 except ImportError:
     AIOHTTP_AVAILABLE = False
-    import urllib.request
-    import urllib.error
-
-try:
-    import httpx
-    HTTPX_AVAILABLE = True
-except ImportError:
-    HTTPX_AVAILABLE = False
-
-try:
-    import requests
-    REQUESTS_AVAILABLE = True
-except ImportError:
-    REQUESTS_AVAILABLE = False
-
-try:
-    import websockets
-    WEBSOCKETS_AVAILABLE = True
-except ImportError:
-    WEBSOCKETS_AVAILABLE = False
 
 try:
     import numpy as np
@@ -153,22 +117,6 @@ try:
 except ImportError:
     NUMPY_AVAILABLE = False
     np = None
-
-try:
-    import pandas as pd
-    PANDAS_AVAILABLE = True
-except ImportError:
-    PANDAS_AVAILABLE = False
-    pd = None
-
-try:
-    from scipy import sparse
-    from scipy.sparse import csr_matrix, lil_matrix
-    from scipy.cluster.hierarchy import linkage, fcluster
-    from scipy.spatial.distance import pdist, squareform
-    SCIPY_AVAILABLE = True
-except ImportError:
-    SCIPY_AVAILABLE = False
 
 try:
     import torch
@@ -180,39 +128,26 @@ except ImportError:
     torch = None
 
 try:
-    from torch_geometric.nn import (
-        GCNConv, GATConv, SAGEConv, TransformerConv,
-        HypergraphConv, HeteroConv, Linear, global_mean_pool,
-        global_max_pool, global_add_pool, MessagePassing
-    )
-    from torch_geometric.data import Data, HeteroData, Batch
-    from torch_geometric.loader import NeighborLoader, DataLoader as PyGDataLoader
-    from torch_geometric.utils import to_dense_adj, dense_to_sparse, subgraph
-    from torch_geometric.transforms import ToUndirected, NormalizeFeatures
+    from torch_geometric.nn import GCNConv
     PYG_AVAILABLE = True
 except ImportError:
     PYG_AVAILABLE = False
 
 try:
     import networkx as nx
-    from networkx.algorithms import community, centrality, components
+    from networkx.algorithms import community
     NETWORKX_AVAILABLE = True
 except ImportError:
     NETWORKX_AVAILABLE = False
     nx = None
 
 try:
-    from cryptography.fernet import Fernet
-    from cryptography.hazmat.backends import default_backend
-    from cryptography.hazmat.primitives import hashes, serialization
-    from cryptography.hazmat.primitives.asymmetric import rsa, padding, ec
-    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     CRYPTO_AVAILABLE = True
 except ImportError:
     CRYPTO_AVAILABLE = False
 
 try:
-    from pydantic import BaseModel, Field, validator, ValidationError, ConfigDict
+    from pydantic import BaseModel
     PYDANTIC_AVAILABLE = True
 except ImportError:
     PYDANTIC_AVAILABLE = False
@@ -226,91 +161,19 @@ except ImportError:
     UVLOOP_AVAILABLE = False
 
 try:
-    import redis.asyncio as redis
-    REDIS_AVAILABLE = True
-except ImportError:
-    REDIS_AVAILABLE = False
-
-try:
-    from motor.motor_asyncio import AsyncIOMotorClient
-    MOTOR_AVAILABLE = True
-except ImportError:
-    MOTOR_AVAILABLE = False
-
-try:
-    from elasticsearch import AsyncElasticsearch
-    ELASTICSEARCH_AVAILABLE = True
-except ImportError:
-    ELASTICSEARCH_AVAILABLE = False
-
-try:
-    import asyncpg
-    ASYNCPG_AVAILABLE = True
-except ImportError:
-    ASYNCPG_AVAILABLE = False
-
-try:
-    import dask.dataframe as dd
-    from dask.distributed import Client as DaskClient, LocalCluster
-    import dask.array as da
-    DASK_AVAILABLE = True
-except ImportError:
-    DASK_AVAILABLE = False
-
-try:
-    import ray
-    from ray import tune
-    RAY_AVAILABLE = True
-except ImportError:
-    RAY_AVAILABLE = False
-
-try:
-    from web3 import Web3, AsyncWeb3
-    from web3.middleware import geth_poa_middleware
+    from web3 import Web3
     WEB3_AVAILABLE = True
 except ImportError:
     WEB3_AVAILABLE = False
 
 try:
-    from prometheus_client import Counter, Histogram, Gauge, generate_latest, CollectorRegistry
-    PROMETHEUS_AVAILABLE = True
-except ImportError:
-    PROMETHEUS_AVAILABLE = False
-
-try:
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-    import matplotlib.patches as mpatches
-    from matplotlib.patches import FancyBboxPatch, Circle, FancyArrowPatch
-    MATPLOTLIB_AVAILABLE = True
-except ImportError:
-    MATPLOTLIB_AVAILABLE = False
-
-try:
-    import plotly.graph_objects as go
-    import plotly.express as px
-    PLOTLY_AVAILABLE = True
-except ImportError:
-    PLOTLY_AVAILABLE = False
-
-try:
     import pennylane as qml
-    from pennylane import numpy as qnp
     QUANTUM_AVAILABLE = True
 except ImportError:
     QUANTUM_AVAILABLE = False
 
 try:
-    from cachetools import TTLCache, LRUCache
-    CACHETOOLS_AVAILABLE = True
-except ImportError:
-    CACHETOOLS_AVAILABLE = False
-
-try:
-    from tenacity import (
-        retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-    )
+    from tenacity import retry
     TENACITY_AVAILABLE = True
 except ImportError:
     TENACITY_AVAILABLE = False
@@ -1832,7 +1695,7 @@ def chunk_list(
     items: List[Any], chunk_size: int
 ) -> List[List[Any]]:
     return [
-        items[i : i + chunk_size]
+        items[i:i + chunk_size]
         for i in range(0, len(items), chunk_size)
     ]
 
@@ -3831,7 +3694,7 @@ class NetworkPatternDetector:
                     > time_window_hours * 3600 * 1e9
                 ):
                     window_start += 1
-                window_txs = txs[window_start : i + 1]
+                window_txs = txs[window_start:i + 1]
                 total_value = sum(
                     float(tx.value.value) for tx in window_txs
                 )
@@ -4489,10 +4352,14 @@ class ForensicReportGenerator:
 <style>
 body {{ font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }}
 .header {{ background: #1a237e; color: white; padding: 20px; text-align: center; }}
-.classified {{ background: #d32f2f; color: white; padding: 10px; text-align: center; font-weight: bold; }}
-.section {{ background: white; margin: 20px 0; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
-.section h2 {{ color: #1a237e; border-bottom: 2px solid #1a237e; padding-bottom: 10px; }}
-.metric {{ display: inline-block; margin: 10px 20px; padding: 10px; background: #e3f2fd; border-radius: 5px; }}
+.classified {{ background: #d32f2f; color: white; padding: 10px;
+  text-align: center; font-weight: bold; }}
+.section {{ background: white; margin: 20px 0; padding: 20px;
+  border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+.section h2 {{ color: #1a237e;
+  border-bottom: 2px solid #1a237e; padding-bottom: 10px; }}
+.metric {{ display: inline-block; margin: 10px 20px;
+  padding: 10px; background: #e3f2fd; border-radius: 5px; }}
 .risk-high {{ color: #d32f2f; font-weight: bold; }}
 table {{ width: 100%; border-collapse: collapse; margin: 10px 0; }}
 th, td {{ padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }}
@@ -4515,8 +4382,10 @@ th {{ background: #1a237e; color: white; }}
 </div>
 <div class="section">
 <h2>Entities Analyzed</h2>
-<div class="metric"><strong>Total Entities:</strong> {report['entities_analyzed']['count']}</div>
-<div class="metric"><strong>Total Relationships:</strong> {report['relationships_analyzed']['count']}</div>
+<div class="metric"><strong>Total Entities:</strong>\
+ {report['entities_analyzed']['count']}</div>
+<div class="metric"><strong>Total Relationships:</strong>\
+ {report['relationships_analyzed']['count']}</div>
 </div>
 <div class="section">
 <h2>Conclusions</h2>
@@ -4953,14 +4822,14 @@ async def main_async() -> int:
             report_path = orchestrator.generate_report(
                 result, output_path, args.format
             )
-            print(f"\nInvestigation complete!")
+            print("\nInvestigation complete!")
             print(
                 f"Investigation ID: {result.investigation_id}"
             )
             print(f"Report saved to: {report_path}")
 
         elif args.command == "status":
-            print(f"\nAEGIS Platform Status")
+            print("\nAEGIS Platform Status")
             print(f"Version: {__version__}")
             print(
                 f"Initialized: {orchestrator._initialized}"
@@ -4974,7 +4843,7 @@ async def main_async() -> int:
             health = (
                 await orchestrator.api_manager.health_check_all()
             )
-            print(f"\nAPI Health Status:")
+            print("\nAPI Health Status:")
             for api, status in health.items():
                 print(f"  {api}: {status.name}")
 
@@ -5404,7 +5273,6 @@ def load_from_json(filepath: str) -> Any:
 
 AVAILABLE_FEATURES = {
     "numpy": NUMPY_AVAILABLE,
-    "pandas": PANDAS_AVAILABLE,
     "torch": TORCH_AVAILABLE,
     "pyg": PYG_AVAILABLE,
     "networkx": NETWORKX_AVAILABLE,
