@@ -1,8 +1,8 @@
 {
   "report_metadata": {
-    "report_id": "RPT-263EFAE2958D4E70",
+    "report_id": "RPT-0D53CAF5B8AF4B4D",
     "report_type": "Forensic Investigation Report",
-    "generated_at": "2026-04-07T17:40:35.229872+00:00",
+    "generated_at": "2026-04-07T17:52:19.212818+00:00",
     "classification": "LAW ENFORCEMENT SENSITIVE",
     "temporal_scope_start": "1985-08-20",
     "temporal_scope_end": "2026-04-07",
@@ -23,7 +23,7 @@
       "W3C"
     ]
   },
-  "executive_summary": "AEGIS platform analysis across 31 blockchain networks identified 18 forensic findings. Transaction classification: 34 total \u2014 4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean. Evidence chain: 36 SHA3-512 linked records, chain verified=True. Graph: 56 nodes, 34 edges.",
+  "executive_summary": "AEGIS analysis across 31 networks: 18 findings, 34 txs classified (4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean). 36 SHA3-512 evidence records (verified). Graph: 56 nodes, 34 edges.",
   "methodology": {
     "daubert_factors": [
       "Testability: All analytical methods are reproducible given identical input data and API responses.",
@@ -34,12 +34,12 @@
     ],
     "data_sources": [
       "OFAC SDN List (U.S. Treasury)",
-      "Tornado Cash / Railgun / Aztec contract registries",
+      "Tornado Cash / Railgun / Aztec registries",
       "Cross-chain bridge registry (8 contracts)",
-      "DeFi protocol registry (Uniswap, Aave, Compound, Curve, Lido, MakerDAO)",
-      "NFT marketplace registry (OpenSea, Blur, LooksRare, X2Y2)",
+      "DeFi: Uniswap, Aave, Compound, Curve, Lido, MakerDAO",
+      "NFT: OpenSea, Blur, LooksRare, X2Y2",
       "NFTX fractionalization protocol",
-      "31-network blockchain configuration database",
+      "31-network blockchain database",
       "USPTO / WIPO / EPO government registries"
     ],
     "analytical_techniques": [
@@ -55,11 +55,11 @@
   },
   "findings": [
     {
-      "finding_id": "FND-8BDF2525ED37",
+      "finding_id": "FND-75D8365E7CA3",
       "category": "OFAC Sanctions",
       "severity": "CRITICAL",
       "title": "OFAC-sanctioned addresses on ethereum",
-      "description": "17 address(es) on OFAC SDN list for ethereum.",
+      "description": "17 address(es) on OFAC SDN list.",
       "evidence_refs": [
         "OFAC-ethereum"
       ],
@@ -71,11 +71,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-705915B67D59",
+      "finding_id": "FND-9BE96267BD7F",
       "category": "OFAC Sanctions",
       "severity": "CRITICAL",
       "title": "OFAC-sanctioned addresses on tron",
-      "description": "1 address(es) on OFAC SDN list for tron.",
+      "description": "1 address(es) on OFAC SDN list.",
       "evidence_refs": [
         "OFAC-tron"
       ],
@@ -87,10 +87,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-A9C57C6374DE",
+      "finding_id": "FND-F15FB986006F",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
-      "title": "7 mixer contract(s) on ethereum",
+      "title": "7 mixer(s) on ethereum",
       "description": "Known mixer/tumbler contracts on ethereum.",
       "evidence_refs": [
         "MIX-ethereum"
@@ -102,10 +102,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-11C9CAEE93A0",
+      "finding_id": "FND-EB49941E95C7",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
-      "title": "1 mixer contract(s) on bsc",
+      "title": "1 mixer(s) on bsc",
       "description": "Known mixer/tumbler contracts on bsc.",
       "evidence_refs": [
         "MIX-bsc"
@@ -117,10 +117,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-A1BAF70D2596",
+      "finding_id": "FND-D1290C728032",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
-      "title": "1 mixer contract(s) on polygon",
+      "title": "1 mixer(s) on polygon",
       "description": "Known mixer/tumbler contracts on polygon.",
       "evidence_refs": [
         "MIX-polygon"
@@ -132,10 +132,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-20CD6C2E83FC",
+      "finding_id": "FND-1254D45D0607",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
-      "title": "1 mixer contract(s) on arbitrum",
+      "title": "1 mixer(s) on arbitrum",
       "description": "Known mixer/tumbler contracts on arbitrum.",
       "evidence_refs": [
         "MIX-arbitrum"
@@ -147,10 +147,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-E7AD34DE64E3",
+      "finding_id": "FND-193E6326C126",
       "category": "Mixer/Tumbler",
       "severity": "HIGH",
-      "title": "1 mixer contract(s) on optimism",
+      "title": "1 mixer(s) on optimism",
       "description": "Known mixer/tumbler contracts on optimism.",
       "evidence_refs": [
         "MIX-optimism"
@@ -162,10 +162,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-A85397E33EAB",
+      "finding_id": "FND-A9438C251FCA",
       "category": "Cross-Chain Bridge",
       "severity": "MEDIUM",
-      "title": "8 bridge contract(s) on ethereum",
+      "title": "8 bridge(s) on ethereum",
       "description": "Cross-chain bridge contracts on ethereum.",
       "evidence_refs": [
         "BRG-ethereum"
@@ -175,10 +175,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-50FD9EF9290E",
+      "finding_id": "FND-7740DEB5AD56",
       "category": "Cross-Chain Bridge",
       "severity": "MEDIUM",
-      "title": "1 bridge contract(s) on bsc",
+      "title": "1 bridge(s) on bsc",
       "description": "Cross-chain bridge contracts on bsc.",
       "evidence_refs": [
         "BRG-bsc"
@@ -188,10 +188,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-692F264B6462",
+      "finding_id": "FND-FCA1F57F390E",
       "category": "Cross-Chain Bridge",
       "severity": "MEDIUM",
-      "title": "2 bridge contract(s) on polygon",
+      "title": "2 bridge(s) on polygon",
       "description": "Cross-chain bridge contracts on polygon.",
       "evidence_refs": [
         "BRG-polygon"
@@ -201,11 +201,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-0BD34575BA5B",
+      "finding_id": "FND-D5BEAF7C2A58",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Uniswap tracked",
-      "description": "DeFi protocol uniswap monitored.",
+      "description": "Protocol uniswap monitored.",
       "evidence_refs": [
         "DEFI-uniswap"
       ],
@@ -214,11 +214,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-5718408FB7C3",
+      "finding_id": "FND-1B4E61719B6B",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Aave tracked",
-      "description": "DeFi protocol aave monitored.",
+      "description": "Protocol aave monitored.",
       "evidence_refs": [
         "DEFI-aave"
       ],
@@ -227,11 +227,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-896C8A42F0F8",
+      "finding_id": "FND-C998C8677E70",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Compound tracked",
-      "description": "DeFi protocol compound monitored.",
+      "description": "Protocol compound monitored.",
       "evidence_refs": [
         "DEFI-compound"
       ],
@@ -240,11 +240,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-502555BABC2E",
+      "finding_id": "FND-FCCFC2EACFCE",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Curve tracked",
-      "description": "DeFi protocol curve monitored.",
+      "description": "Protocol curve monitored.",
       "evidence_refs": [
         "DEFI-curve"
       ],
@@ -253,11 +253,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-139A3A1B0F2C",
+      "finding_id": "FND-77DC6DDF904E",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Lido tracked",
-      "description": "DeFi protocol lido monitored.",
+      "description": "Protocol lido monitored.",
       "evidence_refs": [
         "DEFI-lido"
       ],
@@ -266,11 +266,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-83E191194BE9",
+      "finding_id": "FND-D31C9B5356FE",
       "category": "DeFi Protocol",
       "severity": "LOW",
       "title": "Makerdao tracked",
-      "description": "DeFi protocol makerdao monitored.",
+      "description": "Protocol makerdao monitored.",
       "evidence_refs": [
         "DEFI-makerdao"
       ],
@@ -279,10 +279,10 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-C9453E29CD45",
+      "finding_id": "FND-D988E5A2CBEB",
       "category": "NFT Wash Trading",
       "severity": "HIGH",
-      "title": "Wash trading detected \u2014 NFT #1337",
+      "title": "Wash trading \u2014 NFT #1337",
       "description": "Score 0.50, flags: repeated_counterparty.",
       "evidence_refs": [
         "NFT-WASH-1337"
@@ -292,11 +292,11 @@
       "metadata": {}
     },
     {
-      "finding_id": "FND-B2C37A28AB75",
+      "finding_id": "FND-013150828F72",
       "category": "NFT Fractionalization",
       "severity": "MEDIUM",
-      "title": "NFTX fractionalization protocol detected",
-      "description": "NFTX vault identified on Ethereum mainnet.",
+      "title": "Fractionalization: nftx",
+      "description": "NFTX vault on Ethereum.",
       "evidence_refs": [
         "FRAC-NFTX"
       ],
@@ -325,11 +325,11 @@
   },
   "integrity": {
     "content_hash_algorithm": "SHA3-512",
-    "content_hash": "efb3d41e224ba74e6bcfe373ce9cdc26ab2b732d1b8a7a56b4f80cc7d27449a76b1a4586ab9c3a2a62c74de2f7ecf88e4514b53dcd71613a05ce65071baf9b47",
+    "content_hash": "922c4511555035f29aed33e6627e1528440ffda965fc533204ab41d441d061d36626a3d124317664c70442edb101db69c4b46e94e39d5708761963acf4918740",
     "finding_count": 18
   },
   "supplemental": {
-    "classification_stats": {
+    "stats": {
       "total": 34,
       "sanctioned": 4,
       "mixer": 5,
@@ -338,13 +338,13 @@
       "nft": 5,
       "clean": 5
     },
-    "graph_stats": {
+    "graph": {
       "nodes": 56,
       "edges": 34
     },
-    "evidence_chain_length": 36,
+    "chain_length": 36,
     "chain_verified": true,
-    "wash_trading_analysis": {
+    "wash_trading": {
       "score": 0.5,
       "flags": [
         "repeated_counterparty"

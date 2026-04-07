@@ -6,14 +6,14 @@ AEGIS FORENSIC INTELLIGENCE PLATFORM — INVESTIGATION FINDINGS
 ======================================================================
 
 Investigation ID : AEGIS-INV-001
-Report ID        : RPT-263EFAE2958D4E70
+Report ID        : RPT-0D53CAF5B8AF4B4D
 Classification   : LAW ENFORCEMENT SENSITIVE
 Temporal Scope   : 1985-08-20 through 2026-04-07
 Platform Version : AEGIS v20.1.0
 
 SUMMARY
 ----------------------------------------------------------------------
-AEGIS platform analysis across 31 blockchain networks identified 18 forensic findings. Transaction classification: 34 total — 4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean. Evidence chain: 36 SHA3-512 linked records, chain verified=True. Graph: 56 nodes, 34 edges.
+AEGIS analysis across 31 networks: 18 findings, 34 txs classified (4 sanctioned, 5 mixer, 3 bridge, 13 DeFi, 5 NFT, 5 clean). 36 SHA3-512 evidence records (verified). Graph: 56 nodes, 34 edges.
 
 KEY METRICS
 ----------------------------------------------------------------------
@@ -26,12 +26,12 @@ TOP FINDINGS
 ----------------------------------------------------------------------
   - [CRITICAL] OFAC-sanctioned addresses on ethereum
   - [CRITICAL] OFAC-sanctioned addresses on tron
-  - [HIGH] 7 mixer contract(s) on ethereum
-  - [HIGH] 1 mixer contract(s) on bsc
-  - [HIGH] 1 mixer contract(s) on polygon
-  - [HIGH] 1 mixer contract(s) on arbitrum
-  - [HIGH] 1 mixer contract(s) on optimism
-  - [HIGH] Wash trading detected — NFT #1337
+  - [HIGH] 7 mixer(s) on ethereum
+  - [HIGH] 1 mixer(s) on bsc
+  - [HIGH] 1 mixer(s) on polygon
+  - [HIGH] 1 mixer(s) on arbitrum
+  - [HIGH] 1 mixer(s) on optimism
+  - [HIGH] Wash trading — NFT #1337
 
 METHODOLOGY
 ----------------------------------------------------------------------
@@ -50,8 +50,8 @@ FRE 902(13), FRE 902(14), NIST SP 800-86, ISO/IEC 27037:2012, FBI CJIS v5.9.2, D
 INTEGRITY
 ----------------------------------------------------------------------
 Content Hash (SHA3-512):
-efb3d41e224ba74e6bcfe373ce9cdc26ab2b732d1b8a7a56b4f80cc7d27449a76b1a4586ab9c3a2a62c74de2f7ecf88e4514b53dcd71613a05ce65071baf9b47
+922c4511555035f29aed33e6627e1528440ffda965fc533204ab41d441d061d36626a3d124317664c70442edb101db69c4b46e94e39d5708761963acf4918740
 
 ======================================================================
-AEGIS Forensic Platform — 2026-04-07T17:40:35.230611+00:00
+AEGIS Forensic Platform — 2026-04-07T17:52:19.213513+00:00
 ======================================================================
