@@ -1,0 +1,74 @@
+# =============================================================================
+# AEGIS ULTIMATE MONOLITH v16.0.0 - Dependencies
+# =============================================================================
+# All packages use >= to allow compatible upgrades.  Pin exact versions in
+# a lock file (pip-compile / poetry.lock) for reproducible deployments.
+# =============================================================================
+
+# --- Core HTTP / Networking ---
+aiohttp>=3.9
+httpx>=0.27
+requests>=2.31
+websockets>=12.0
+
+# --- Scientific Computing ---
+numpy>=1.26
+pandas>=2.2
+scipy>=1.12
+
+# --- Machine Learning (PyTorch ecosystem) ---
+# NOTE: Install torch with CUDA support separately if GPU acceleration
+# is required.  See https://pytorch.org/get-started/locally/
+# torch>=2.2
+# torch-geometric>=2.5
+# torch-scatter>=2.1
+# torch-sparse>=0.6
+
+# --- Graph Analysis ---
+networkx>=3.2
+
+# --- Cryptography ---
+cryptography>=42.0
+
+# --- Data Validation ---
+pydantic>=2.6
+
+# --- Async Event Loop ---
+# uvloop>=0.19  # Linux/macOS only
+
+# --- Databases ---
+# redis>=5.0
+# motor>=3.3
+# elasticsearch>=8.12
+# asyncpg>=0.29
+
+# --- Distributed Processing ---
+# dask[complete]>=2024.1
+# ray[default]>=2.9
+
+# --- Blockchain ---
+# web3>=6.15
+
+# --- Metrics & Monitoring ---
+# prometheus-client>=0.20
+
+# --- Visualization ---
+matplotlib>=3.8
+# plotly>=5.18
+
+# --- Quantum Computing (Optional) ---
+# pennylane>=0.35
+
+# --- Caching & Resilience ---
+cachetools>=5.3
+tenacity>=8.2
+
+# --- AI Agent Team (vLLM + HuggingFace) ---
+huggingface-hub>=0.23
+openai>=1.30
+# transformers>=4.40    # needed only for local tokenizer use
+# vllm>=0.4             # install on GPU servers serving models
+
+# --- Testing ---
+pytest>=8.1
+pytest-asyncio>=0.23
