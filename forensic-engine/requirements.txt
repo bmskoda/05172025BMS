@@ -1,0 +1,5 @@
+# APOLLO-SKODA-OMNISPHERE-QUANTUM-∞ Forensic Engine Dependencies
+# NIST SP 800-53 / ISO 27001 / DoD CMMC L3 Compliant
+aiohttp>=3.9.0
+aiohttp-retry>=2.8.0
+cryptography>=42.0.0
