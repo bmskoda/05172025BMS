@@ -613,28 +613,43 @@ DEFAULT_BACKOFF_SECONDS: Final[int] = 2
 DEFAULT_PRECISION_DIGITS: Final[int] = 369
 
 START_DATE_STR: Final[str] = "1985-08-20"
-END_DATE_STR: Final[str] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+END_DATE_STR: Final[str] = max(
+    "2026-04-07",
+    datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+)
 
 HASH_ALGORITHM: Final[str] = "sha3_512"
 MIN_KEY_SIZE: Final[int] = 32
 MAX_KEY_SIZE: Final[int] = 64
 
 RATE_LIMITS = {
+    # Intellectual Property (11 offices)
     "uspto": 500, "epo": 1000, "wipo": 300, "cnipa": 200, "jpo": 300,
     "kipo": 300, "euipo": 400, "ipouk": 300, "ipindia": 200, "dpma": 300,
-    "chainalysis": 2000, "elliptic": 1000, "bitquery": 500, "blockchair": 300,
-    "cryptocompare": 1000, "coinmarketcap": 10000, "nftscan": 500,
-    "alchemy": 1000, "infura": 100000, "moralis": 1500, "dune": 300,
-    "covalent": 500, "zapper": 300, "web3index": 200, "etherscan": 5,
+    "rospatent": 200,
+    # Blockchain & Crypto (16 services)
+    "chainalysis": 2000, "elliptic": 1000, "bitquery": 500,
+    "blockchair": 300, "cryptocompare": 1000, "coinmarketcap": 10000,
+    "nftscan": 500, "alchemy": 1000, "infura": 100000, "moralis": 1500,
+    "dune": 300, "covalent": 500, "zapper": 300, "web3index": 200,
+    "etherscan": 5, "trm_labs": 500,
+    # Government & Regulatory
     "sec_edgar": 10, "fincen": 100, "ofac": 50, "unscr": 100,
     "fbi_ucr": 500, "bop": 200, "usaspending": 1000, "sam": 500,
-    "fsoc": 100, "wayback": 200, "opencorporates": 200, "sayari": 500,
-    "courtlistener": 1000,
+    "fsoc": 100,
+    # Public Records & Intelligence
+    "wayback": 200, "opencorporates": 200, "sayari": 500,
+    "courtlistener": 1000, "gleif": 300, "icij": 100,
+    # AI & Synthesis
+    "langchain": 1000, "langsmith": 1000,
 }
 
 API_ENDPOINTS = {
+    # Intellectual Property Offices (11 jurisdictions)
     "uspto": "https://developer.uspto.gov/api/v1",
     "uspto_pair": "https://pair.uspto.gov/api/v1",
+    "data_uspto": "https://data.uspto.gov/api/v1",
+    "bulkdata_uspto": "https://bulkdata.uspto.gov",
     "epo": "https://ops.epo.org/3.2",
     "wipo": "https://www3.wipo.int/wipopes/api/v1",
     "cnipa": "https://api.cnipa.gov.cn/v1",
@@ -644,6 +659,8 @@ API_ENDPOINTS = {
     "ipouk": "https://api.ipo.gov.uk/v1",
     "ipindia": "https://api.ipindia.gov.in/v1",
     "dpma": "https://api.dpma.de/v1",
+    "rospatent": "https://api.rospatent.gov.ru/v1",
+    # Blockchain & Crypto (16 services)
     "chainalysis": "https://api.chainalysis.com/api",
     "elliptic": "https://api.elliptic.co/v2",
     "bitquery": "https://graphql.bitquery.io",
@@ -659,27 +676,36 @@ API_ENDPOINTS = {
     "zapper": "https://api.zapper.fi/v2",
     "web3index": "https://api.web3index.org/v1",
     "etherscan": "https://api.etherscan.io/api",
+    "trm_labs": "https://api.trmlabs.com/public/v1",
+    # Government & Regulatory
     "sec_edgar": "https://www.sec.gov/Archives/edgar/daily-index",
     "sec_submissions": "https://data.sec.gov/submissions",
     "sec_xbrl": "https://data.sec.gov/api/xbrl/companyfacts",
     "fincen": "https://www.fincen.gov/sites/default/files/",
     "ofac_sdn": "https://www.treasury.gov/ofac/downloads/sdn.xml",
     "ofac_consolidated": (
-        "https://www.treasury.gov/ofac/downloads/consolidated/consolidated.xml"
+        "https://www.treasury.gov/ofac/downloads/"
+        "consolidated/consolidated.xml"
     ),
     "unscr": (
-        "https://www.un.org/securitycouncil/content/un-sc-consolidated-list"
+        "https://www.un.org/securitycouncil/"
+        "content/un-sc-consolidated-list"
     ),
     "fbi_ucr": "https://api.ucr.fbi.gov/crime-data",
     "bop": "https://www.bop.gov/PublicInfo/execute/inmate",
     "usaspending": "https://api.usaspending.gov/api/v2",
     "sam": "https://sam.gov/api/prod/opportunities/v1",
     "fsoc": "https://home.treasury.gov/data/fsoc",
+    # Public Records & Intelligence
     "wayback": "https://web.archive.org/web",
     "wayback_cdx": "https://web.archive.org/cdx/search/cdx",
     "opencorporates": "https://api.opencorporates.com/v0.4",
     "sayari": "https://api.sayari.com/v1",
     "courtlistener": "https://www.courtlistener.com/api/rest/v3",
+    "gleif": "https://api.gleif.org/api/v1",
+    # AI & Synthesis
+    "langchain": "https://api.langchain.com",
+    "langsmith": "https://api.smith.langchain.com",
 }
 
 STOLEN_PATENT_FAMILIES = 14213
