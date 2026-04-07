@@ -1,0 +1,24 @@
+[
+  {
+    "patent_id": "US-EXAMPLE-001",
+    "application_number": "17/000001",
+    "publication_number": "US-2023-0000001-A1",
+    "inventors": [
+      { "name": "Jane Q. Inventor", "country": "US" }
+    ],
+    "assignees": [
+      { "name": "Acme Corp", "assignee_organization": "Acme Corp" }
+    ]
+  },
+  {
+    "patent_id": "US-EXAMPLE-002",
+    "application_number": "17/000002",
+    "publication_number": "US-2023-0000002-A1",
+    "inventors": [
+      { "name": "Jane Q. Inventor", "country": "US" }
+    ],
+    "assignees": [
+      { "name": "Jane Q. Inventor" }
+    ]
+  }
+]
