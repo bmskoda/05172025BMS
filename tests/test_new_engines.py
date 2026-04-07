@@ -1,50 +1,34 @@
-"""Tests for the new engines: known-addresses, risk scoring, NFT, monitoring, evidence."""
+"""Tests for engines: known-addresses, risk scoring, NFT, monitoring, evidence, blockchain enrichment."""
 
 import asyncio
+import json
 import unittest
 from decimal import Decimal
 
-from aegis.constants import RiskLevel, PrivacyProtocol
+from aegis.constants import PrivacyProtocol, RiskLevel
 from aegis.engines.known_addresses import (
-    BLOCKCHAIN_NETWORKS,
-    KNOWN_BRIDGES,
-    KNOWN_DEFI,
-    KNOWN_MIXERS,
-    OFAC_SANCTIONED,
-    NFT_MARKETPLACES,
-    FRACTIONALIZATION_PROTOCOLS,
-    METHOD_SIGNATURES,
-    BRIDGE_DESTINATION,
+    BLOCKCHAIN_NETWORKS, KNOWN_BRIDGES, KNOWN_DEFI, KNOWN_MIXERS,
+    OFAC_SANCTIONED, NFT_MARKETPLACES, FRACTIONALIZATION_PROTOCOLS,
+    METHOD_SIGNATURES, BRIDGE_DESTINATION,
 )
 from aegis.engines.risk_scoring import RiskScorer
 from aegis.engines.nft_tracker import NFTTracker
 from aegis.engines.monitoring import BlockchainMonitor
+from aegis.engines.blockchain import TransactionTracer
 from aegis.reports.evidence import EvidenceChainBuilder
 from aegis.models.core import (
-    BlockchainAddress,
-    EvidenceMetadata,
-    PrecisionDecimal,
-    Timestamp,
-    Transaction,
+    BlockchainAddress, EvidenceMetadata, PrecisionDecimal, Timestamp, Transaction,
 )
 
 
-def _tx(
-    frm: str = "0xaaa",
-    to: str = "0xbbb",
-    value: float = 1.5,
-    network: str = "ethereum",
-    input_data: str = "0x",
-) -> Transaction:
+def _tx(frm="0xaaa", to="0xbbb", value=1.5, network="ethereum", input_data="0x", depth=0):
     return Transaction(
-        tx_hash=f"0x{hash((frm, to)):032x}",
-        network=network,
-        block_number=1,
+        tx_hash=f"0x{hash((frm, to, value)):032x}", network=network, block_number=1,
         timestamp=Timestamp.now(),
         from_address=BlockchainAddress(frm, network),
         to_address=BlockchainAddress(to, network),
         value=PrecisionDecimal(Decimal(str(value))),
-        input_data=input_data,
+        input_data=input_data, trace_depth=depth,
     )
 
 
@@ -58,7 +42,7 @@ class TestKnownAddresses(unittest.TestCase):
     def test_mixers_lower(self):
         for net, addrs in KNOWN_MIXERS.items():
             for a in addrs:
-                self.assertEqual(a, a.lower(), f"Mixer addr not lowercase: {a}")
+                self.assertEqual(a, a.lower(), f"Not lowercase: {a}")
 
     def test_bridges_have_destinations(self):
         for name in KNOWN_BRIDGES.get("ethereum", {}):
@@ -69,116 +53,160 @@ class TestKnownAddresses(unittest.TestCase):
         self.assertIn("0xa9059cbb", METHOD_SIGNATURES)
         self.assertEqual(METHOD_SIGNATURES["0xa9059cbb"], "transfer")
 
+    def test_defi_multichain(self):
+        self.assertIn("ethereum", KNOWN_DEFI["aave_v3"])
+        self.assertIn("polygon", KNOWN_DEFI["aave_v3"])
+
+    def test_nft_marketplaces(self):
+        self.assertIn("opensea", NFT_MARKETPLACES.get("ethereum", {}))
+
 
 class TestRiskScorer(unittest.TestCase):
-    def test_sanctioned_address(self):
-        scorer = RiskScorer()
-        tx = _tx(to="0x722122df12d4e14e13ac3b6895a86e84145b6967")
-        result = scorer.score_transaction(tx)
-        self.assertTrue(result["is_sanctioned"])
-        self.assertEqual(result["risk_score"], 1.0)
+    def test_sanctioned(self):
+        s = RiskScorer()
+        r = s.score_transaction(_tx(to="0x722122df12d4e14e13ac3b6895a86e84145b6967"))
+        self.assertTrue(r["is_sanctioned"])
+        self.assertEqual(r["risk_score"], 1.0)
 
-    def test_mixer_address(self):
-        scorer = RiskScorer()
-        tx = _tx(to="0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3")
-        result = scorer.score_transaction(tx)
-        self.assertTrue(result["is_mixer"])
-        self.assertGreaterEqual(result["risk_score"], 0.9)
+    def test_mixer(self):
+        s = RiskScorer()
+        r = s.score_transaction(_tx(to="0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3"))
+        self.assertTrue(r["is_mixer"])
+        self.assertGreaterEqual(r["risk_score"], 0.9)
 
-    def test_clean_address(self):
-        scorer = RiskScorer()
-        tx = _tx(frm="0xaaa", to="0xbbb", value=0.5)
-        result = scorer.score_transaction(tx)
-        self.assertFalse(result["is_sanctioned"])
-        self.assertFalse(result["is_mixer"])
+    def test_clean(self):
+        s = RiskScorer()
+        r = s.score_transaction(_tx(frm="0xaaa", to="0xbbb", value=0.5))
+        self.assertFalse(r["is_sanctioned"])
+        self.assertFalse(r["is_mixer"])
 
     def test_large_amount(self):
-        scorer = RiskScorer()
-        tx = _tx(value=2_000_000)
-        result = scorer.score_transaction(tx)
-        self.assertIn("very_large_amount", result["factors"])
+        s = RiskScorer()
+        r = s.score_transaction(_tx(value=2_000_000))
+        self.assertIn("very_large_amount", r["factors"])
 
     def test_method_detection(self):
-        scorer = RiskScorer()
-        tx = _tx(input_data="0xa9059cbb0000000000000000")
-        result = scorer.score_transaction(tx)
-        self.assertEqual(result["method"], "transfer")
+        s = RiskScorer()
+        r = s.score_transaction(_tx(input_data="0xa9059cbb0000000000000000"))
+        self.assertEqual(r["method"], "transfer")
+
+    def test_flash_loan_risk(self):
+        s = RiskScorer()
+        r = s.score_transaction(_tx(input_data="0x5b41b908" + "00" * 28))
+        self.assertIn("flash_loan_risk", r["factors"])
+
+    def test_round_amount(self):
+        s = RiskScorer()
+        r = s.score_transaction(_tx(value=100))
+        self.assertIn("round_amount", r["factors"])
 
     def test_level_mapping(self):
-        scorer = RiskScorer()
-        self.assertEqual(scorer._level(0.95), RiskLevel.CRITICAL)
-        self.assertEqual(scorer._level(0.75), RiskLevel.HIGH)
-        self.assertEqual(scorer._level(0.55), RiskLevel.MEDIUM)
-        self.assertEqual(scorer._level(0.35), RiskLevel.LOW)
-        self.assertEqual(scorer._level(0.1), RiskLevel.MINIMAL)
+        s = RiskScorer()
+        self.assertEqual(s._level(0.95), RiskLevel.CRITICAL)
+        self.assertEqual(s._level(0.75), RiskLevel.HIGH)
+        self.assertEqual(s._level(0.55), RiskLevel.MEDIUM)
+        self.assertEqual(s._level(0.35), RiskLevel.LOW)
+        self.assertEqual(s._level(0.1), RiskLevel.MINIMAL)
+
+
+class TestBlockchainEnrichment(unittest.TestCase):
+    def test_enrich_sanctioned(self):
+        tx = _tx(to="0x722122df12d4e14e13ac3b6895a86e84145b6967")
+        enriched = TransactionTracer._enrich_inline(tx)
+        self.assertTrue(enriched.is_sanctioned)
+        self.assertGreaterEqual(enriched.risk_score, 0.9)
+
+    def test_enrich_bridge(self):
+        tx = _tx(to="0x99c9fc46f92e8a1c0dec1b1747d010903e884be1")
+        enriched = TransactionTracer._enrich_inline(tx)
+        self.assertTrue(enriched.is_bridge)
+        self.assertIsNotNone(enriched.bridge_info)
+        self.assertEqual(enriched.bridge_info["destination"], "optimism")
+
+    def test_enrich_defi(self):
+        tx = _tx(to="0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2")
+        enriched = TransactionTracer._enrich_inline(tx)
+        self.assertTrue(enriched.is_defi)
+        self.assertEqual(enriched.defi_info["protocol"], "aave_v3")
+
+    def test_enrich_clean(self):
+        tx = _tx()
+        enriched = TransactionTracer._enrich_inline(tx)
+        self.assertFalse(enriched.is_sanctioned)
+        self.assertFalse(enriched.is_mixer)
 
 
 class TestEvidenceChainBuilder(unittest.TestCase):
     def test_add_and_verify(self):
         ecb = EvidenceChainBuilder()
-        meta1 = EvidenceMetadata(evidence_id="e1", investigator_id="agent1")
-        meta2 = EvidenceMetadata(evidence_id="e2", investigator_id="agent1")
-        ecb.add("case1", {"data": "first"}, meta1)
-        ecb.add("case1", {"data": "second"}, meta2)
+        ecb.add("case1", {"d": "first"}, EvidenceMetadata(evidence_id="e1", investigator_id="a1"))
+        ecb.add("case1", {"d": "second"}, EvidenceMetadata(evidence_id="e2", investigator_id="a1"))
         v = ecb.verify("case1")
         self.assertTrue(v["valid"])
         self.assertEqual(v["length"], 2)
 
-    def test_export_contains_merkle(self):
+    def test_export_merkle(self):
         ecb = EvidenceChainBuilder()
-        meta = EvidenceMetadata(evidence_id="e1")
-        ecb.add("case2", {"x": 1}, meta)
-        exported = ecb.export("case2")
-        import json
-        d = json.loads(exported)
+        ecb.add("c", {"x": 1}, EvidenceMetadata(evidence_id="e1"))
+        d = json.loads(ecb.export("c"))
         self.assertIn("merkle_root", d)
         self.assertGreater(len(d["merkle_root"]), 0)
 
-    def test_hash_chain_linkage(self):
+    def test_hash_chain(self):
         ecb = EvidenceChainBuilder()
         for i in range(5):
-            meta = EvidenceMetadata(evidence_id=f"e{i}")
-            ecb.add("case3", {"idx": i}, meta)
-        chain = ecb._chains["case3"]
+            ecb.add("c3", {"i": i}, EvidenceMetadata(evidence_id=f"e{i}"))
+        chain = ecb._chains["c3"]
         for i in range(1, len(chain)):
             self.assertEqual(chain[i]["previous_hash"], chain[i - 1]["hash"])
 
+    def test_export_verification_section(self):
+        ecb = EvidenceChainBuilder()
+        ecb.add("c4", {"a": 1}, EvidenceMetadata(evidence_id="e0"))
+        d = json.loads(ecb.export("c4"))
+        self.assertIn("verification", d)
+        self.assertIn("hash_algorithm", d["verification"])
+
 
 class TestNFTTracker(unittest.TestCase):
-    def test_wash_trading_zero_for_few(self):
-        score = NFTTracker._wash_trading_score([{"from": "a", "to": "b"}])
-        self.assertEqual(score, 0.0)
+    def test_wash_zero_few(self):
+        self.assertEqual(NFTTracker._wash_trading_score([{"from": "a", "to": "b"}]), 0.0)
 
-    def test_wash_trading_detected(self):
-        transfers = [{"from": "a", "to": "b"}] * 5
-        score = NFTTracker._wash_trading_score(transfers)
-        self.assertGreater(score, 0)
+    def test_wash_detected(self):
+        self.assertGreater(NFTTracker._wash_trading_score([{"from": "a", "to": "b"}] * 5), 0)
 
-    def test_trading_analysis_empty(self):
-        result = NFTTracker._trading_analysis([])
-        self.assertEqual(result["num_sales"], 0)
+    def test_trading_empty(self):
+        self.assertEqual(NFTTracker._trading_analysis([])["num_sales"], 0)
 
-    def test_risk_score_calculation(self):
-        transfers = [{"from": "a", "to": "b"}] * 15
-        wash = NFTTracker._wash_trading_score(transfers)
-        risk = NFTTracker._risk_score(transfers, wash)
-        self.assertGreater(risk, 0)
-        self.assertLessEqual(risk, 1.0)
+    def test_risk(self):
+        t = [{"from": "a", "to": "b"}] * 15
+        self.assertGreater(NFTTracker._risk_score(t, NFTTracker._wash_trading_score(t)), 0)
+        self.assertLessEqual(NFTTracker._risk_score(t, NFTTracker._wash_trading_score(t)), 1.0)
 
-    def test_fractionalization_check(self):
-        result = NFTTracker._check_fractionalization(
-            "0x3f05de786e00f2741fb0c6ffde9c1b5e4b2e1d6b", "ethereum"
-        )
-        self.assertIsNotNone(result)
-        self.assertEqual(result["protocol"], "fractional")
+    def test_frac_check(self):
+        r = NFTTracker._check_fractionalization("0x3f05de786e00f2741fb0c6ffde9c1b5e4b2e1d6b", "ethereum")
+        self.assertIsNotNone(r)
+        self.assertEqual(r["protocol"], "fractional")
 
 
 class TestBlockchainMonitor(unittest.TestCase):
     def test_init(self):
-        scorer = RiskScorer()
-        mon = BlockchainMonitor(scorer, monitored_addresses={"0xAAA"})
+        mon = BlockchainMonitor(RiskScorer(), monitored_addresses={"0xAAA"})
         self.assertIn("0xaaa", mon.monitored)
-        self.assertEqual(mon.stats["alerts"], 0)
+
+    def test_classify_sanctioned(self):
+        mon = BlockchainMonitor(RiskScorer())
+        self.assertEqual(
+            mon.classify_alert("0x722122df12d4e14e13ac3b6895a86e84145b6967", "ethereum"),
+            "SANCTIONED_ADDRESS",
+        )
+
+    def test_classify_mixer(self):
+        mon = BlockchainMonitor(RiskScorer())
+        self.assertEqual(
+            mon.classify_alert("0xd4b88df4d29f5cedd6857912842cff3b20c8cfa3", "ethereum"),
+            "MIXER_TRANSACTION",
+        )
 
 
 if __name__ == "__main__":

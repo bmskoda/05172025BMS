@@ -211,6 +211,7 @@ class AEGISOrchestrator:
         pat = await self._inv_patent(target, opts)
         tip = await self._inv_tokenized_ip(target, opts)
         wc = await self._inv_wallet_community(target, opts)
+        nft = await self._inv_nft(target, opts)
         return InvestigationResult(
             investigation_id=f"COMP-{uuid.uuid4().hex[:8].upper()}",
             timestamp=Timestamp.now(),
@@ -223,8 +224,28 @@ class AEGISOrchestrator:
                 "patent": pat.risk_assessment,
                 "tokenized_ip": tip.risk_assessment,
                 "wallet_community": wc.risk_assessment,
+                "nft": nft.risk_assessment,
             },
         )
+
+    async def batch_analyze(
+        self, targets: List[Dict[str, str]], max_concurrent: int = 50,
+    ) -> List[InvestigationResult]:
+        """Run investigations concurrently for a batch of targets.
+
+        Each entry in *targets* is ``{"type": ..., "target": ..., **opts}``.
+        """
+        sem = asyncio.Semaphore(max_concurrent)
+
+        async def _one(entry: Dict[str, str]) -> InvestigationResult:
+            async with sem:
+                inv_type = entry.pop("type", "blockchain")
+                tgt = entry.pop("target")
+                return await self.run_investigation(inv_type, tgt, entry)
+
+        return list(await asyncio.gather(
+            *[_one(dict(e)) for e in targets], return_exceptions=False,
+        ))
 
     # -- monitoring ----------------------------------------------------------
 
