@@ -41,7 +41,8 @@ def _build_parser() -> argparse.ArgumentParser:
         "investigation_type",
         choices=[
             "blockchain", "patent", "tokenized_ip",
-            "wallet_community", "nft", "comprehensive",
+            "wallet_community", "nft", "domain",
+            "substance", "prosecution", "comprehensive",
         ],
     )
     inv.add_argument("--target", required=True)

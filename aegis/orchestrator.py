@@ -14,11 +14,13 @@ from aegis.api.manager import APIIntegrationManager
 from aegis.config import UnifiedConfiguration
 from aegis.constants import EntityType, Jurisdiction
 from aegis.engines.blockchain import BlockchainForensicsEngine
+from aegis.engines.domain_investigation import DomainInvestigator
 from aegis.engines.monitoring import BlockchainMonitor
 from aegis.engines.network_graph import NetworkGraphAnalyzer
 from aegis.engines.nft_tracker import NFTTracker
-from aegis.engines.patent import PatentAnalysisEngine
+from aegis.engines.patent import PatentAnalysisEngine, FileWrapperAnalyzer
 from aegis.engines.risk_scoring import RiskScorer
+from aegis.engines.substance_tracing import SubstanceTracer
 from aegis.engines.tokenized_ip import TokenizedIPEngine
 from aegis.engines.wallet_community import WalletCommunityMapper
 from aegis.models.core import (
@@ -56,11 +58,14 @@ class AEGISOrchestrator:
         self.api_manager = APIIntegrationManager(self.config)
         self.blockchain = BlockchainForensicsEngine(self.api_manager, self.config)
         self.patent = PatentAnalysisEngine(self.api_manager, self.config)
+        self.file_wrapper = FileWrapperAnalyzer()
         self.tokenized_ip = TokenizedIPEngine(self.api_manager, self.config)
         self.community_mapper = WalletCommunityMapper(self.api_manager, self.config)
         self.network = NetworkGraphAnalyzer(self.config)
         self.risk_scorer = RiskScorer(self.api_manager)
         self.nft_tracker = NFTTracker(self.api_manager)
+        self.domain_investigator = DomainInvestigator(self.api_manager)
+        self.substance_tracer = SubstanceTracer(self.api_manager)
         self.monitor = BlockchainMonitor(self.risk_scorer)
         self.evidence = EvidenceChainBuilder(
             key_dir=f"{self.config.output_dir}/evidence_keys"
@@ -104,6 +109,9 @@ class AEGISOrchestrator:
             "tokenized_ip": self._inv_tokenized_ip,
             "wallet_community": self._inv_wallet_community,
             "nft": self._inv_nft,
+            "domain": self._inv_domain,
+            "substance": self._inv_substance,
+            "prosecution": self._inv_prosecution,
             "comprehensive": self._inv_comprehensive,
         }
         handler = dispatch.get(investigation_type)
@@ -203,6 +211,46 @@ class AEGISOrchestrator:
                 "wash_trading_score": nft.get("wash_trading_score", 0),
                 "is_fractionalized": nft.get("is_fractionalized", False),
                 "nft_analysis": nft,
+            },
+        )
+
+    async def _inv_domain(self, target: str, opts: Dict) -> InvestigationResult:
+        result = await self.domain_investigator.investigate(target)
+        return InvestigationResult(
+            investigation_id=f"DOMAIN-{uuid.uuid4().hex[:8].upper()}",
+            timestamp=Timestamp.now(),
+            risk_assessment={
+                "overall_risk": "MEDIUM",
+                "domain_investigation": result,
+            },
+        )
+
+    async def _inv_substance(self, target: str, opts: Dict) -> InvestigationResult:
+        chain_id = opts.get("chain_id", 1)
+        token_result = await self.substance_tracer.trace_token(target, chain_id)
+        patterns = await self.substance_tracer.detect_market_patterns(target, chain_id)
+        risk = "HIGH" if token_result.get("risk_indicators") or patterns else "LOW"
+        return InvestigationResult(
+            investigation_id=f"SUBSTANCE-{uuid.uuid4().hex[:8].upper()}",
+            timestamp=Timestamp.now(),
+            risk_assessment={
+                "overall_risk": risk,
+                "token_trace": token_result,
+                "market_patterns": patterns,
+            },
+        )
+
+    async def _inv_prosecution(self, target: str, opts: Dict) -> InvestigationResult:
+        h_flags = await self.file_wrapper.detect_h_flags(self.api_manager, target)
+        timeline = await self.file_wrapper.analyze_prosecution_timeline(self.api_manager, target)
+        risk = "HIGH" if h_flags.get("has_h_flag") or timeline.get("anomalies") else "LOW"
+        return InvestigationResult(
+            investigation_id=f"PROSECUTION-{uuid.uuid4().hex[:8].upper()}",
+            timestamp=Timestamp.now(),
+            risk_assessment={
+                "overall_risk": risk,
+                "h_flag_analysis": h_flags,
+                "prosecution_timeline": timeline,
             },
         )
 

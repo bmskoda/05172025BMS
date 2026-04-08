@@ -14,9 +14,13 @@ from aegis.api.clients import (
     EllipticClient,
     EPOClient,
     EtherscanClient,
+    EtherscanV2Client,
     NFTScanClient,
     OpenCorporatesClient,
+    RDAPClient,
     USPTOClient,
+    USPTOFileWrapperClient,
+    WaybackCDXClient,
     WIPOClient,
 )
 from aegis.config import UnifiedConfiguration
@@ -35,28 +39,39 @@ class APIIntegrationManager:
 
     async def initialize(self) -> None:
         _c = self.config
-        _register = self._clients.__setitem__
+        _r = self._clients.__setitem__
 
+        # IP offices
         if _c.uspto_api_key:
-            _register("uspto", USPTOClient(_c.uspto_api_key))
+            _r("uspto", USPTOClient(_c.uspto_api_key))
+            _r("uspto_file_wrapper", USPTOFileWrapperClient(_c.uspto_api_key))
         if _c.epo_api_key:
-            _register("epo", EPOClient(_c.epo_api_key))
+            _r("epo", EPOClient(_c.epo_api_key))
         if _c.wipo_api_key:
-            _register("wipo", WIPOClient(_c.wipo_api_key))
+            _r("wipo", WIPOClient(_c.wipo_api_key))
+
+        # Blockchain analytics
         if _c.chainalysis_api_key:
-            _register("chainalysis", ChainalysisClient(_c.chainalysis_api_key))
+            _r("chainalysis", ChainalysisClient(_c.chainalysis_api_key))
         if _c.elliptic_api_key:
-            _register("elliptic", EllipticClient(_c.elliptic_api_key))
+            _r("elliptic", EllipticClient(_c.elliptic_api_key))
         if _c.bitquery_api_key:
-            _register("bitquery", BitqueryClient(_c.bitquery_api_key))
+            _r("bitquery", BitqueryClient(_c.bitquery_api_key))
         if _c.etherscan_api_key:
-            _register("etherscan", EtherscanClient(_c.etherscan_api_key))
+            _r("etherscan", EtherscanClient(_c.etherscan_api_key))
+            _r("etherscan_v2", EtherscanV2Client(_c.etherscan_api_key))
         if _c.nftscan_api_key:
-            _register("nftscan", NFTScanClient(_c.nftscan_api_key))
+            _r("nftscan", NFTScanClient(_c.nftscan_api_key))
+
+        # Public records
         if _c.opencorporates_api_key:
-            _register("opencorporates", OpenCorporatesClient(_c.opencorporates_api_key))
+            _r("opencorporates", OpenCorporatesClient(_c.opencorporates_api_key))
         if _c.courtlistener_api_key:
-            _register("courtlistener", CourtListenerClient(_c.courtlistener_api_key))
+            _r("courtlistener", CourtListenerClient(_c.courtlistener_api_key))
+
+        # Always-available (no key required)
+        _r("rdap", RDAPClient())
+        _r("wayback_cdx", WaybackCDXClient())
 
         self._logger.info("Initialized %d API clients", len(self._clients))
 

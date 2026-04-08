@@ -290,3 +290,125 @@ class CourtListenerClient(APIClient):
     async def health_check(self) -> APIStatus:
         r = await self._make_request(HTTPMethod.GET, "/dockets/", params={"case_name": "test"})
         return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+# ===================================================================
+# Etherscan v2 multi-chain client
+# ===================================================================
+
+
+class EtherscanV2Client(APIClient):
+    """Etherscan v2 API — single endpoint, multi-chain via ``chainid`` param."""
+
+    CHAIN_NAMES = {1: "mainnet", 137: "polygon", 56: "bsc", 42161: "arbitrum", 10: "optimism", 8453: "base"}
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("EtherscanV2", "https://api.etherscan.io/v2/api", api_key, 5)
+
+    async def get_balance(self, address: str, chain_id: int = 1) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, "",
+            params={"module": "account", "action": "balance", "address": address,
+                    "tag": "latest", "apikey": self.api_key, "chainid": chain_id},
+        )
+
+    async def get_transactions(self, address: str, chain_id: int = 1, limit: int = 50) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, "",
+            params={"module": "account", "action": "txlist", "address": address,
+                    "startblock": 0, "endblock": 99999999, "page": 1, "offset": limit,
+                    "sort": "desc", "apikey": self.api_key, "chainid": chain_id},
+        )
+
+    async def get_token_transfers(self, address: str, chain_id: int = 1) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, "",
+            params={"module": "account", "action": "tokentx", "address": address,
+                    "sort": "desc", "apikey": self.api_key, "chainid": chain_id},
+        )
+
+    async def profile_address(self, address: str, chain_id: int = 1) -> APIResponse:
+        """Convenience: balance + recent tx count in one call."""
+        bal = await self.get_balance(address, chain_id)
+        txs = await self.get_transactions(address, chain_id, limit=50)
+        tx_list = txs.data.get("result", []) if txs.success and isinstance(txs.data, dict) else []
+        return APIResponse(
+            success=True,
+            data={
+                "address": address,
+                "chain": self.CHAIN_NAMES.get(chain_id, f"chain-{chain_id}"),
+                "balance_wei": int(bal.data.get("result", 0)) if bal.success and isinstance(bal.data, dict) else 0,
+                "tx_count": len(tx_list),
+                "risk_indicators": ["high-volume"] if len(tx_list) > 100 else [],
+            },
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(
+            HTTPMethod.GET, "",
+            params={"module": "stats", "action": "ethprice", "apikey": self.api_key, "chainid": 1},
+        )
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+# ===================================================================
+# RDAP domain lookup client
+# ===================================================================
+
+
+class RDAPClient(APIClient):
+    """RDAP (Registration Data Access Protocol) client for domain investigation."""
+
+    def __init__(self) -> None:
+        super().__init__("RDAP", "https://rdap.org", "", 60)
+
+    async def lookup_domain(self, domain: str) -> APIResponse:
+        return await self._make_request(HTTPMethod.GET, f"/domain/{domain}")
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(HTTPMethod.GET, "/domain/example.com")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+# ===================================================================
+# Wayback Machine CDX API client
+# ===================================================================
+
+
+class WaybackCDXClient(APIClient):
+    """Internet Archive Wayback Machine CDX API for historical snapshots."""
+
+    def __init__(self) -> None:
+        super().__init__("WaybackCDX", "https://web.archive.org/cdx/search/cdx", "", 30)
+
+    async def search(self, url: str, limit: int = 50) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, "",
+            params={"url": url, "output": "json", "limit": limit, "fl": "timestamp,original,statuscode"},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self.search("example.com", limit=1)
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+# ===================================================================
+# USPTO Patent File Wrapper API client
+# ===================================================================
+
+
+class USPTOFileWrapperClient(APIClient):
+    """USPTO Patent Application File Wrapper search API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("USPTOFileWrapper", "https://data.uspto.gov/apis/patent-file-wrapper", api_key, 30)
+
+    async def search(self, application_number: str, rows: int = 500) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.POST, "/search",
+            data={"searchText": application_number, "start": 0, "rows": rows},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self.search("16000001", rows=1)
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE

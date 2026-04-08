@@ -151,6 +151,66 @@ class GhostDocketDetector:
 
 
 # ---------------------------------------------------------------------------
+# USPTO file-wrapper H-flag & prosecution-timeline analyser
+# ---------------------------------------------------------------------------
+
+
+class FileWrapperAnalyzer:
+    """Queries the USPTO Patent File Wrapper API to detect hold (H-flag)
+    events, examiner changes, and prosecution-timeline anomalies."""
+
+    def __init__(self) -> None:
+        self._log = get_logger("Patent.FileWrapper")
+
+    async def detect_h_flags(
+        self, api_mgr: APIIntegrationManager, application_number: str
+    ) -> Dict[str, Any]:
+        """Search file-wrapper transactions for hold events."""
+        cli = api_mgr.get_client("uspto_file_wrapper")
+        if not cli:
+            return {"has_h_flag": False, "transactions": [], "error": "client not configured"}
+        resp = await cli.search(application_number)
+        if not resp.success:
+            return {"has_h_flag": False, "transactions": [], "error": resp.error}
+        results = resp.data.get("results", []) if isinstance(resp.data, dict) else []
+        h_flags = [r for r in results if "H" in str(r.get("transactionCode", "")).upper()]
+        return {
+            "application_number": application_number,
+            "has_h_flag": len(h_flags) > 0,
+            "h_flag_count": len(h_flags),
+            "transaction_count": len(results),
+            "transactions": results[:50],
+        }
+
+    async def analyze_prosecution_timeline(
+        self, api_mgr: APIIntegrationManager, application_number: str
+    ) -> Dict[str, Any]:
+        """Analyze prosecution timeline for anomalies."""
+        h_result = await self.detect_h_flags(api_mgr, application_number)
+        transactions = h_result.get("transactions", [])
+        anomalies: List[str] = []
+
+        examiners: Set[str] = set()
+        for txn in transactions:
+            examiner = txn.get("examinerName", "")
+            if examiner:
+                examiners.add(examiner)
+        if len(examiners) > 3:
+            anomalies.append(f"excessive_examiner_changes:{len(examiners)}")
+
+        if h_result.get("has_h_flag"):
+            anomalies.append("h_flag_detected")
+
+        return {
+            "application_number": application_number,
+            "transaction_count": len(transactions),
+            "examiner_count": len(examiners),
+            "anomalies": anomalies,
+            "h_flag": h_result.get("has_h_flag", False),
+        }
+
+
+# ---------------------------------------------------------------------------
 # Patent-family analyser
 # ---------------------------------------------------------------------------
 
