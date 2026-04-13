@@ -8,6 +8,7 @@ from typing import Dict, Optional
 
 from aegis.api.base import APIClient
 from aegis.api.clients import (
+    AlchemyClient,
     BitqueryClient,
     ChainalysisClient,
     CourtListenerClient,
@@ -62,6 +63,8 @@ class APIIntegrationManager:
             _r("etherscan_v2", EtherscanV2Client(_c.etherscan_api_key))
         if _c.nftscan_api_key:
             _r("nftscan", NFTScanClient(_c.nftscan_api_key))
+        if _c.alchemy_api_key:
+            _r("alchemy", AlchemyClient(_c.alchemy_api_key))
 
         # Public records
         if _c.opencorporates_api_key:

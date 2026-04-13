@@ -207,6 +207,28 @@ class EvidenceChainBuilder:
             },
         }, indent=2)
 
+    def create_evidence_bag(self, case_id: str, classification: str = "ATTORNEY WORK PRODUCT") -> Dict[str, Any]:
+        """Create an FRE 902(13)-(14) compliant evidence bag with hash chain,
+        Merkle root, BLAKE2b seal, and optional ECDSA signature."""
+        chain = self._chains.get(case_id, [])
+        seal = self.create_seal(case_id)
+        bag_id = f"BAG-{secrets.token_hex(8).upper()}"
+        return {
+            "bag_version": "AEGIS-EVIDENCE-BAG-V2",
+            "bag_id": bag_id,
+            "case_id": case_id,
+            "created_utc": Timestamp.now().to_iso(),
+            "classification": classification,
+            "evidence_count": len(chain),
+            "merkle_root": self._merkle_roots.get(case_id, ""),
+            "chain_hash_sha3": hashlib.sha3_512(
+                json.dumps(chain, sort_keys=True, default=str).encode()
+            ).hexdigest(),
+            "blake2b_seal": seal,
+            "signed": bool(self._private_key),
+            "fre_compliance": ["FRE 902(13)", "FRE 902(14)", "NIST SP 800-86"],
+        }
+
     def _update_merkle(self, case_id: str) -> None:
         hashes = [e["hash"] for e in self._chains[case_id]]
         while len(hashes) > 1:

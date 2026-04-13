@@ -412,3 +412,39 @@ class USPTOFileWrapperClient(APIClient):
     async def health_check(self) -> APIStatus:
         r = await self.search("16000001", rows=1)
         return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+# ===================================================================
+# Alchemy Transfers API client
+# ===================================================================
+
+
+class AlchemyClient(APIClient):
+    """Alchemy JSON-RPC client for asset transfers (ERC-20/721/1155)."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("Alchemy", f"https://eth-mainnet.g.alchemy.com/v2/{api_key}", api_key, 1000)
+
+    async def get_asset_transfers(
+        self, address: str, direction: str = "from", categories: Optional[list] = None,
+    ) -> APIResponse:
+        cats = categories or ["erc20", "erc721", "erc1155"]
+        params = {
+            "fromBlock": "0x0", "toBlock": "latest",
+            "category": cats,
+        }
+        if direction == "from":
+            params["fromAddress"] = address
+        else:
+            params["toAddress"] = address
+        return await self._make_request(
+            HTTPMethod.POST, "",
+            data={"jsonrpc": "2.0", "id": 1, "method": "alchemy_getAssetTransfers", "params": [params]},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(
+            HTTPMethod.POST, "",
+            data={"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []},
+        )
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
