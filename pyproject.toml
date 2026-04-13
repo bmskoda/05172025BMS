@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegis-forensic-platform"
+version = "16.0.0"
+description = "Enterprise IP & Blockchain Forensic Analysis Platform"
+requires-python = ">=3.10"
+dependencies = ["aiohttp>=3.9"]
+
+[project.optional-dependencies]
+graph = ["networkx>=3.2"]
+ml = ["torch>=2.2", "torch-geometric>=2.5"]
+science = ["numpy>=1.26"]
+all = ["networkx>=3.2", "numpy>=1.26", "aiohttp>=3.9"]
+
+[project.scripts]
+aegis = "aegis.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["aegis*"]

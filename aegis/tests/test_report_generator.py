@@ -9,7 +9,7 @@ import pytest
 
 from aegis.reports.generator import (
     Finding,
-    ForensicReportGenerator,
+    FindingsReportGenerator,
     ReportMetadata,
 )
 
@@ -91,9 +91,9 @@ class TestReportMetadata:
         assert m.investigation_id == "INV-123"
 
 
-class TestForensicReportGenerator:
+class TestFindingsReportGenerator:
     def test_generate_creates_three_files(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         findings = _sample_findings()
         result = gen.generate(
             findings=findings,
@@ -105,7 +105,7 @@ class TestForensicReportGenerator:
         assert result["press_release"].exists()
 
     def test_json_report_structure(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["USPTO", "EPO"],
@@ -119,7 +119,7 @@ class TestForensicReportGenerator:
         assert "integrity" in data
 
     def test_json_metadata_compliance(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -133,7 +133,7 @@ class TestForensicReportGenerator:
         assert meta["temporal_scope_start"] == "1985-08-20"
 
     def test_json_integrity_hash(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -143,7 +143,7 @@ class TestForensicReportGenerator:
         assert len(data["integrity"]["content_hash"]) == 128
 
     def test_json_statistics(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         findings = _sample_findings()
         result = gen.generate(
             findings=findings,
@@ -159,7 +159,7 @@ class TestForensicReportGenerator:
         assert stats["avg_confidence"] > 0
 
     def test_json_daubert_factors(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -171,7 +171,7 @@ class TestForensicReportGenerator:
         assert any("General Acceptance" in f for f in factors)
 
     def test_html_contains_key_elements(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -188,7 +188,7 @@ class TestForensicReportGenerator:
         assert "OFAC-sanctioned" in html
 
     def test_press_release_structure(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -205,7 +205,7 @@ class TestForensicReportGenerator:
         assert "SHA3-512" in text
 
     def test_auto_summary(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -214,7 +214,7 @@ class TestForensicReportGenerator:
         assert "4 finding(s)" in data["executive_summary"]
 
     def test_custom_summary(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -224,7 +224,7 @@ class TestForensicReportGenerator:
         assert data["executive_summary"] == "Custom summary text."
 
     def test_empty_findings(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=[],
             data_sources=["Etherscan"],
@@ -234,7 +234,7 @@ class TestForensicReportGenerator:
         assert data["statistics"]["avg_confidence"] == 0.0
 
     def test_supplemental_metadata(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],
@@ -244,7 +244,7 @@ class TestForensicReportGenerator:
         assert data["supplemental"]["custom_field"] == "value"
 
     def test_investigation_id_propagation(self, tmp_path):
-        gen = ForensicReportGenerator(output_dir=tmp_path)
+        gen = FindingsReportGenerator(output_dir=tmp_path)
         result = gen.generate(
             findings=_sample_findings(),
             data_sources=["Etherscan"],

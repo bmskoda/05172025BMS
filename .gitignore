@@ -46,6 +46,13 @@ dist/
 build/
 .eggs/
 *.egg
-.pytest_cache/
 .venv/
 venv/
+.mypy_cache/
+.pytest_cache/
+
+# AEGIS output #
+#################
+output/
+logs/
+/models/
