@@ -45,6 +45,17 @@ class UnifiedConfiguration:
     cryptocompare_api_key: str = ""
     coinmarketcap_api_key: str = ""
     nftscan_api_key: str = ""
+    trmlabs_api_key: str = ""
+    blockchair_api_key: str = ""
+    covalent_api_key: str = ""
+    # IP offices (additional)
+    cnipa_api_key: str = ""
+    jpo_api_key: str = ""
+    kipo_api_key: str = ""
+    euipo_api_key: str = ""
+    ipouk_api_key: str = ""
+    dpma_api_key: str = ""
+    ipindia_api_key: str = ""
     # Public records
     opencorporates_api_key: str = ""
     courtlistener_api_key: str = ""
@@ -96,6 +107,16 @@ class UnifiedConfiguration:
         c.cryptocompare_api_key = _e(f"{ENV_PREFIX}CRYPTOCOMPARE_API_KEY", "")
         c.coinmarketcap_api_key = _e(f"{ENV_PREFIX}COINMARKETCAP_API_KEY", "")
         c.nftscan_api_key = _e(f"{ENV_PREFIX}NFTSCAN_API_KEY", "")
+        c.trmlabs_api_key = _e(f"{ENV_PREFIX}TRMLABS_API_KEY", "")
+        c.blockchair_api_key = _e(f"{ENV_PREFIX}BLOCKCHAIR_API_KEY", "")
+        c.covalent_api_key = _e(f"{ENV_PREFIX}COVALENT_API_KEY", "")
+        c.cnipa_api_key = _e(f"{ENV_PREFIX}CNIPA_API_KEY", "")
+        c.jpo_api_key = _e(f"{ENV_PREFIX}JPO_API_KEY", "")
+        c.kipo_api_key = _e(f"{ENV_PREFIX}KIPO_API_KEY", "")
+        c.euipo_api_key = _e(f"{ENV_PREFIX}EUIPO_API_KEY", "")
+        c.ipouk_api_key = _e(f"{ENV_PREFIX}IPOUK_API_KEY", "")
+        c.dpma_api_key = _e(f"{ENV_PREFIX}DPMA_API_KEY", "")
+        c.ipindia_api_key = _e(f"{ENV_PREFIX}IPINDIA_API_KEY", "")
         c.opencorporates_api_key = _e(f"{ENV_PREFIX}OPENCORPORATES_API_KEY", "")
         c.courtlistener_api_key = _e(f"{ENV_PREFIX}COURTLISTENER_API_KEY", "")
 

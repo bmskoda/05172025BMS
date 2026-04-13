@@ -14,6 +14,7 @@ from aegis.api.manager import APIIntegrationManager
 from aegis.config import UnifiedConfiguration
 from aegis.constants import EntityType, Jurisdiction
 from aegis.engines.blockchain import BlockchainForensicsEngine
+from aegis.engines.correlation import CrossDomainCorrelator, TemporalWindow, LCSDiffDetector
 from aegis.engines.domain_investigation import DomainInvestigator
 from aegis.engines.monitoring import BlockchainMonitor
 from aegis.engines.network_graph import NetworkGraphAnalyzer
@@ -66,6 +67,7 @@ class AEGISOrchestrator:
         self.nft_tracker = NFTTracker(self.api_manager)
         self.domain_investigator = DomainInvestigator(self.api_manager)
         self.substance_tracer = SubstanceTracer(self.api_manager)
+        self.correlator = CrossDomainCorrelator()
         self.monitor = BlockchainMonitor(self.risk_scorer)
         self.evidence = EvidenceChainBuilder(
             key_dir=f"{self.config.output_dir}/evidence_keys"

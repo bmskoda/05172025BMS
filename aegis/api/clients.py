@@ -412,3 +412,294 @@ class USPTOFileWrapperClient(APIClient):
     async def health_check(self) -> APIStatus:
         r = await self.search("16000001", rows=1)
         return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+# ===================================================================
+# Alchemy Transfers API client
+# ===================================================================
+
+
+class AlchemyClient(APIClient):
+    """Alchemy JSON-RPC client for asset transfers (ERC-20/721/1155)."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("Alchemy", f"https://eth-mainnet.g.alchemy.com/v2/{api_key}", api_key, 1000)
+
+    async def get_asset_transfers(
+        self, address: str, direction: str = "from", categories: Optional[list] = None,
+    ) -> APIResponse:
+        cats = categories or ["erc20", "erc721", "erc1155"]
+        params = {
+            "fromBlock": "0x0", "toBlock": "latest",
+            "category": cats,
+        }
+        if direction == "from":
+            params["fromAddress"] = address
+        else:
+            params["toAddress"] = address
+        return await self._make_request(
+            HTTPMethod.POST, "",
+            data={"jsonrpc": "2.0", "id": 1, "method": "alchemy_getAssetTransfers", "params": [params]},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(
+            HTTPMethod.POST, "",
+            data={"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []},
+        )
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+# ===================================================================
+# Additional IP office clients (7 jurisdictions)
+# ===================================================================
+
+
+class CNIPAClient(APIClient):
+    """China National Intellectual Property Administration."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("CNIPA", "https://api.cnipa.gov.cn/patent", api_key, 200)
+
+    async def get_patent(self, app_number: str) -> APIResponse:
+        return await self._make_request(HTTPMethod.GET, f"/{app_number}")
+
+    async def health_check(self) -> APIStatus:
+        return APIStatus.UNAVAILABLE  # requires gateway registration
+
+
+class JPOClient(APIClient):
+    """Japan Patent Office (J-PlatPat)."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("JPO", "https://api.j-platpat.inpit.go.jp/api/v1", api_key, 300)
+
+    async def search(self, query: str) -> APIResponse:
+        return await self._make_request(HTTPMethod.GET, "/patent", params={"query": query})
+
+    async def health_check(self) -> APIStatus:
+        r = await self.search("test")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class KIPOClient(APIClient):
+    """Korean Intellectual Property Office."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("KIPO", "https://api.kipo.go.kr/openapi/service/rest/PatentService", api_key, 300)
+
+    async def search(self, keyword: str) -> APIResponse:
+        return await self._make_request(HTTPMethod.GET, "", params={"ServiceKey": self.api_key, "keyword": keyword})
+
+    async def health_check(self) -> APIStatus:
+        r = await self.search("test")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class EUIPOClient(APIClient):
+    """European Union Intellectual Property Office (TMview / DesignView)."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("EUIPO", "https://euipo.europa.eu/eSearchAPI/api", api_key, 400)
+
+    async def search_trademarks(self, query: str) -> APIResponse:
+        return await self._make_request(HTTPMethod.GET, "/tm/search", params={"q": query})
+
+    async def health_check(self) -> APIStatus:
+        r = await self.search_trademarks("test")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class IPOUKClient(APIClient):
+    """UK Intellectual Property Office."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("IPOUK", "https://api.ipo.gov.uk/1.0", api_key, 300)
+
+    async def get_patent(self, pub_number: str) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, f"/patent/{pub_number}",
+            headers={"Ocp-Apim-Subscription-Key": self.api_key},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self.get_patent("GB2000000")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class DPMAClient(APIClient):
+    """German Patent and Trade Mark Office (DPMAregister)."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("DPMA", "https://register.dpma.de/DPMAregister/rest", api_key, 300)
+
+    async def search(self, aktenzeichen: str) -> APIResponse:
+        return await self._make_request(HTTPMethod.GET, f"/application/{aktenzeichen}")
+
+    async def health_check(self) -> APIStatus:
+        r = await self.search("102020000000")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class IPIndiaClient(APIClient):
+    """Indian Intellectual Property Office."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("IPIndia", "https://ipindiaservices.gov.in/api", api_key, 200)
+
+    async def get_application(self, app_number: str) -> APIResponse:
+        return await self._make_request(HTTPMethod.GET, f"/patent/{app_number}")
+
+    async def health_check(self) -> APIStatus:
+        return APIStatus.UNAVAILABLE  # requires portal registration
+
+
+# ===================================================================
+# Additional blockchain analytics clients (8 services)
+# ===================================================================
+
+
+class TRMLabsClient(APIClient):
+    """TRM Labs screening API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("TRMLabs", "https://api.trmlabs.com/public/v1", api_key, 500)
+
+    async def screen_address(self, address: str) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.POST, "/screening/addresses", data={"address": address},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(HTTPMethod.GET, "/health")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class InfuraClient(APIClient):
+    """Infura JSON-RPC gateway."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("Infura", f"https://mainnet.infura.io/v3/{api_key}", api_key, 100_000)
+
+    async def eth_get_logs(self, address: str, topics: Optional[list] = None) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.POST, "",
+            data={"jsonrpc": "2.0", "id": 1, "method": "eth_getLogs",
+                  "params": [{"address": address, "topics": topics or [], "fromBlock": "earliest", "toBlock": "latest"}]},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(
+            HTTPMethod.POST, "",
+            data={"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []},
+        )
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class MoralisClient(APIClient):
+    """Moralis Web3 API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("Moralis", "https://deep-index.moralis.io/api/v2", api_key, 1500)
+
+    async def get_token_transfers(self, address: str) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, f"/{address}/erc20/transfers",
+            headers={"X-API-Key": self.api_key},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(HTTPMethod.GET, "/web3/version")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class CovalentClient(APIClient):
+    """Covalent Unified API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("Covalent", "https://api.covalenthq.com/v1", api_key, 500)
+
+    async def get_transactions(self, chain_id: int, address: str) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, f"/{chain_id}/address/{address}/transactions_v2/",
+            params={"key": self.api_key},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(HTTPMethod.GET, "/1/block/latest/", params={"key": self.api_key})
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class DuneClient(APIClient):
+    """Dune Analytics API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("Dune", "https://api.dune.com/api/v1", api_key, 300)
+
+    async def execute_query(self, query_id: int) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.POST, f"/query/{query_id}/execute",
+            headers={"x-dune-api-key": self.api_key},
+        )
+
+    async def get_query_results(self, execution_id: str) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, f"/execution/{execution_id}/results",
+            headers={"x-dune-api-key": self.api_key},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(HTTPMethod.GET, "/health")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class BlockchairClient(APIClient):
+    """Blockchair multi-chain explorer API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("Blockchair", "https://api.blockchair.com", api_key, 300)
+
+    async def get_address(self, chain: str, address: str) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, f"/{chain}/dashboards/address/{address}",
+            params={"key": self.api_key} if self.api_key else None,
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self._make_request(HTTPMethod.GET, "/ethereum/stats")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class CryptoCompareClient(APIClient):
+    """CryptoCompare market data API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("CryptoCompare", "https://min-api.cryptocompare.com/data", api_key, 1000)
+
+    async def get_price(self, fsym: str, tsyms: str = "USD") -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, "/price",
+            params={"fsym": fsym, "tsyms": tsyms, "api_key": self.api_key},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self.get_price("BTC")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
+
+
+class CoinMarketCapClient(APIClient):
+    """CoinMarketCap Pro API."""
+
+    def __init__(self, api_key: str = "") -> None:
+        super().__init__("CoinMarketCap", "https://pro-api.coinmarketcap.com/v1", api_key, 10_000)
+
+    async def get_quotes(self, symbol: str) -> APIResponse:
+        return await self._make_request(
+            HTTPMethod.GET, "/cryptocurrency/quotes/latest",
+            params={"symbol": symbol},
+            headers={"X-CMC_PRO_API_KEY": self.api_key},
+        )
+
+    async def health_check(self) -> APIStatus:
+        r = await self.get_quotes("BTC")
+        return APIStatus.HEALTHY if r.success else APIStatus.UNAVAILABLE
