@@ -1,6 +1,6 @@
 export const metrics = {
   investigationStart: '1985-08-20',
-  investigationEnd: '2026-04-27',
+  investigationEnd: '2026-04-30',
   victim: 'Brent Michael Škoda',
   victimAliases: ['Brent Michael Skoda', 'Brent Škoda', 'Brent Skoda', 'B. M. Škoda', 'B. M. Skoda'],
   victimDOB: '1985-08-20',
