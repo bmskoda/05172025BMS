@@ -24,13 +24,14 @@ import CyberDustDetection from './components/dashboard/CyberDustDetection';
 import SyntheticInventors from './components/dashboard/SyntheticInventors';
 import TreasuryWalletFreeze from './components/dashboard/TreasuryWalletFreeze';
 import CitationErasure from './components/dashboard/CitationErasure';
+import CorpusHardening from './components/dashboard/CorpusHardening';
 
 const SECTIONS = [
   'executive', 'network', 'leaders', 'financial', 'patents',
   'wipo', 'isincusip', 'capture', 'tokenized',
   'cyberdust', 'synthetic', 'treasury', 'erasure',
   'blockchain', 'shellcorps', 'fentanyl', 'evidence',
-  'agents', 'timeline', 'sources', 'compliance', 'report',
+  'agents', 'timeline', 'sources', 'compliance', 'hardening', 'report',
 ];
 
 export default function App() {
@@ -111,6 +112,8 @@ export default function App() {
           <DataSourcesGrid />
           <div className="section-divider" />
           <ComplianceMatrix />
+          <div className="section-divider" />
+          <CorpusHardening />
           <div className="section-divider" />
           <ForensicReport />
         </div>

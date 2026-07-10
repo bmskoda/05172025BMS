@@ -45,6 +45,7 @@ export default function Sidebar({ isOpen, onClose, activeSection, onNavigate }) 
     { id: 'timeline', label: 'Investigation Timeline', icon: Calendar },
     { id: 'sources', label: 'Data Sources', icon: Database },
     { id: 'compliance', label: 'Compliance Matrix', icon: CheckSquare },
+    { id: 'hardening', label: 'Corpus Hardening Gate', icon: ShieldCheck },
     { id: 'report', label: 'Report & Press Release', icon: Scroll },
   ];
 
