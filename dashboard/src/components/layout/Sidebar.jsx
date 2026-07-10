@@ -29,6 +29,7 @@ export default function Sidebar({ isOpen, onClose, activeSection, onNavigate }) 
     { id: 'wipo', label: '194 WIPO Jurisdictions', icon: Globe },
     { id: 'isincusip', label: 'ISIN / CUSIP Exposure', icon: CreditCard },
     { id: 'capture', label: 'Regulatory Capture', icon: AlertTriangle },
+    { id: 'tokenized', label: 'Tokenized IP Tracing', icon: Network },
     { id: 'blockchain', label: 'Blockchain Forensics', icon: Link },
     { id: 'shellcorps', label: 'Shell Corporations', icon: Building2 },
     { id: 'fentanyl', label: 'Fentanyl Disruption', icon: Skull },
