@@ -20,10 +20,13 @@ import IsinCusipPanel from './components/dashboard/IsinCusipPanel';
 import RegulatoryCapture from './components/dashboard/RegulatoryCapture';
 import ForensicReport from './components/dashboard/ForensicReport';
 import TokenizedIPTracing from './components/dashboard/TokenizedIPTracing';
+import CyberDustDetection from './components/dashboard/CyberDustDetection';
+import SyntheticInventors from './components/dashboard/SyntheticInventors';
 
 const SECTIONS = [
   'executive', 'network', 'leaders', 'financial', 'patents',
   'wipo', 'isincusip', 'capture', 'tokenized',
+  'cyberdust', 'synthetic',
   'blockchain', 'shellcorps', 'fentanyl', 'evidence',
   'agents', 'timeline', 'sources', 'compliance', 'report',
 ];
@@ -82,6 +85,10 @@ export default function App() {
           <RegulatoryCapture />
           <div className="section-divider" />
           <TokenizedIPTracing />
+          <div className="section-divider" />
+          <CyberDustDetection />
+          <div className="section-divider" />
+          <SyntheticInventors />
           <div className="section-divider" />
           <BlockchainForensics />
           <div className="section-divider" />
