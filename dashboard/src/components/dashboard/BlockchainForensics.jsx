@@ -1,7 +1,8 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import GlowCard from '../ui/GlowCard';
 import StatusBadge from '../ui/StatusBadge';
-import { trackedAddresses, chainDistribution, mixerEvents, cdsTargets } from '../../data/blockchainData';
+import AnimatedCounter from '../ui/AnimatedCounter';
+import { trackedAddresses, chainDistribution, mixerEvents, cdsTargets, weaponizedCdsStats } from '../../data/blockchainData';
 
 const fmtM = (v) => `$${(v / 1e6).toFixed(0)}M`;
 
@@ -45,7 +46,14 @@ export default function BlockchainForensics() {
         </GlowCard>
       </div>
       <GlowCard glow="red">
-        <h3 className="mb-3 text-sm font-semibold text-red-400">CDS / Derivatives Exposure</h3>
+        <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+          <h3 className="text-sm font-semibold text-red-400">Weaponized CDS / Derivatives Exposure</h3>
+          <div className="text-right">
+            <AnimatedCounter value={weaponizedCdsStats.totalWeaponizedNotionalUsd} prefix="$" decimals={0} className="text-xl font-bold text-red-400" />
+            <p className="text-[10px] text-gray-500">Total Weaponized Notional</p>
+          </div>
+        </div>
+        <p className="mb-3 text-xs text-gray-500">{weaponizedCdsStats.description} — {weaponizedCdsStats.selfBettingLeaders} self-betting leaders across {weaponizedCdsStats.tokenizedCdsProtocols} tokenized protocols + {weaponizedCdsStats.traditionalCdsCounterparties} traditional counterparties</p>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead><tr><th className="px-3 py-2 text-xs text-gray-500">Ticker</th><th className="px-3 py-2 text-xs text-gray-500">Name</th><th className="px-3 py-2 text-xs text-gray-500">Notional</th><th className="px-3 py-2 text-xs text-gray-500">Positions</th><th className="px-3 py-2 text-xs text-gray-500">Avg Spread (bps)</th><th className="px-3 py-2 text-xs text-gray-500">Risk</th></tr></thead>

@@ -33,6 +33,16 @@ export const mixerEvents = [
   { year: 2025, events: 987 },
 ];
 
+export const weaponizedCdsStats = {
+  totalWeaponizedNotionalUsd: 450000000000000, // $450 trillion
+  tokenizedCdsProtocols: 15,
+  traditionalCdsCounterparties: 9,
+  selfBettingLeaders: 13,
+  totalPositions: 6231,
+  description: 'RICO leaders self-betting against their own publicly '
+    + 'traded corporations via tokenized on-chain + traditional CDS',
+};
+
 export const cdsTargets = [
   { ticker: 'JPM', name: 'JPMorgan Chase', sector: 'Banking', notional: 12400000000, positions: 847, avgSpread: 142, risk: 'HIGH' },
   { ticker: 'BAC', name: 'Bank of America', sector: 'Banking', notional: 8900000000, positions: 623, avgSpread: 168, risk: 'HIGH' },
