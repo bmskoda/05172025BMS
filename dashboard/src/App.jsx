@@ -23,11 +23,12 @@ import TokenizedIPTracing from './components/dashboard/TokenizedIPTracing';
 import CyberDustDetection from './components/dashboard/CyberDustDetection';
 import SyntheticInventors from './components/dashboard/SyntheticInventors';
 import TreasuryWalletFreeze from './components/dashboard/TreasuryWalletFreeze';
+import CitationErasure from './components/dashboard/CitationErasure';
 
 const SECTIONS = [
   'executive', 'network', 'leaders', 'financial', 'patents',
   'wipo', 'isincusip', 'capture', 'tokenized',
-  'cyberdust', 'synthetic', 'treasury',
+  'cyberdust', 'synthetic', 'treasury', 'erasure',
   'blockchain', 'shellcorps', 'fentanyl', 'evidence',
   'agents', 'timeline', 'sources', 'compliance', 'report',
 ];
@@ -92,6 +93,8 @@ export default function App() {
           <SyntheticInventors />
           <div className="section-divider" />
           <TreasuryWalletFreeze />
+          <div className="section-divider" />
+          <CitationErasure />
           <div className="section-divider" />
           <BlockchainForensics />
           <div className="section-divider" />
