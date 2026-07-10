@@ -65,11 +65,22 @@ from typing import (
 )
 from urllib.parse import urljoin
 
-import aiohttp
-from aiohttp import ClientTimeout
-from aiohttp_retry import RetryClient, ExponentialRetry
+# Optional network imports with graceful fallback (engine runs in
+# deterministic demo/archive mode when network libraries are absent)
+try:
+    import aiohttp
+    from aiohttp import ClientTimeout
+    from aiohttp_retry import RetryClient, ExponentialRetry
+    HAS_AIOHTTP = True
+except ImportError:  # pragma: no cover - environment-dependent
+    HAS_AIOHTTP = False
 
-# Optional imports with graceful fallback
+    class ClientTimeout:  # type: ignore
+        """Minimal stand-in used when aiohttp is unavailable."""
+
+        def __init__(self, *args: Any, **kwargs: Any) -> None:
+            pass
+
 try:
     import orjson
     HAS_ORJSON = True
@@ -465,10 +476,14 @@ class GovernmentAPIClient:
         )
         self._ssl = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         self._sem = asyncio.Semaphore(SecurityConfig.MAX_CONCURRENCY)
-        self._retry = ExponentialRetry(
-            attempts=SecurityConfig.MAX_RETRIES,
-            start_timeout=1.0,
-            max_timeout=10.0,
+        self._retry = (
+            ExponentialRetry(
+                attempts=SecurityConfig.MAX_RETRIES,
+                start_timeout=1.0,
+                max_timeout=10.0,
+            )
+            if HAS_AIOHTTP
+            else None
         )
 
     def _headers(self, source: str) -> Dict[str, str]:
@@ -489,6 +504,12 @@ class GovernmentAPIClient:
         params: Optional[Dict] = None,
     ) -> Optional[Dict]:
         """Execute a single API request with retry and rate limit."""
+        if not HAS_AIOHTTP:
+            # Deterministic archive mode: no live network available.
+            logger.info(
+                "[%s] Network unavailable - deterministic mode", source
+            )
+            return None
         async with self._sem:
             try:
                 async with aiohttp.ClientSession(
@@ -940,6 +961,9 @@ class CorpusHardeningGate:
         "isin_cusip_linkage", "regulatory_capture", "tokenized_ip",
         "treasury_genius_payloads", "chain_of_custody",
         "cryptographic_integrity", "jurisdictional_coverage",
+        "weaponized_cds", "professional_enablers", "wayback_archival",
+        "dao_stealth_licensing", "beneficiary_attribution",
+        "merkle_anchor",
     ]
 
     def __init__(self, chain: "ImmutableEvidenceChain") -> None:

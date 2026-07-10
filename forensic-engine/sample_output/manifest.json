@@ -1,0 +1,78 @@
+{
+  "omega_version": "3.1.0-CONSOLIDATED-AEGIS-v27",
+  "total_artifacts": 9,
+  "entries": [
+    {
+      "artifact_id": "genius_freeze_0x742d35Cc66",
+      "sha3_256": "d947e96c3b056115f2d52a9c84d1ed321b797adc33333c4d9081edc0e909f179",
+      "stored_utc": "2026-07-10T05:44:29.876474+00:00"
+    },
+    {
+      "artifact_id": "genius_freeze_0x9c2bc757b6",
+      "sha3_256": "81b5160dc2785a5fd3a5c2e487f53ee7b872858897316e781d9853ccc35e4306",
+      "stored_utc": "2026-07-10T05:44:29.876655+00:00"
+    },
+    {
+      "artifact_id": "genius_freeze_0x7ff9cfad38",
+      "sha3_256": "1f1ef24b020a577b9cd267c9972e0005168f1f554a03c4cff4805b1e4be9da43",
+      "stored_utc": "2026-07-10T05:44:29.876797+00:00"
+    },
+    {
+      "artifact_id": "genius_freeze_TN2YqTv9HE52",
+      "sha3_256": "5f70b2e12f7ad6f372d3819cb1f59ca0625d092f634e744158431acc1e91bb48",
+      "stored_utc": "2026-07-10T05:44:29.876928+00:00"
+    },
+    {
+      "artifact_id": "corpus_hardening_report",
+      "sha3_256": "fae882ec01e492b40a02f1bd6f52285bcae6360e705744f1c85a0489b7ec8a5b",
+      "stored_utc": "2026-07-10T05:44:29.879959+00:00"
+    },
+    {
+      "artifact_id": "merkle_anchor",
+      "sha3_256": "a181ed6e6f8ec0e607f96da93b0e0563387d93f8b7594ddd57d67de60503b1f1",
+      "stored_utc": "2026-07-10T05:44:29.880723+00:00"
+    },
+    {
+      "artifact_id": "evidence_chain",
+      "sha3_256": "3da8ecce650d4ae0c4354545eb4528e2af2db557c2f7e43a30b2d6fa87817c70",
+      "stored_utc": "2026-07-10T05:44:29.881634+00:00"
+    },
+    {
+      "artifact_id": "forensic_report",
+      "sha3_256": "371369ee8037f7810a7bc1890565461b85b21ec54995a9692e3e3f19a85ba670",
+      "stored_utc": "2026-07-10T05:44:29.881894+00:00"
+    },
+    {
+      "artifact_id": "press_release",
+      "sha3_256": "e0f2ebebc86b3a66747f10c8753d988855d61407dec6a109610bf1ce7c4c4eb8",
+      "stored_utc": "2026-07-10T05:44:29.881950+00:00"
+    }
+  ],
+  "compliance": [
+    "NIST SP 800-53 Rev.5",
+    "NIST SP 800-61 Rev.2 Incident Response",
+    "NIST SP 800-86 Forensic Integration",
+    "NIST SP 800-88 Media Sanitization",
+    "NIST SP 800-92 Log Management",
+    "NIST SP 800-175B Crypto Guidelines",
+    "FIPS 140-3 Cryptographic Modules",
+    "FIPS 202 SHA-3 Standard",
+    "ISO/IEC 27001:2022 InfoSec",
+    "ISO/IEC 27037:2012 Digital Evidence",
+    "FISMA High Baseline",
+    "DoD Risk Management Framework",
+    "DoD 5015.02-STD Records Mgmt",
+    "CMMC Level 3",
+    "DOJ CRM 9-110.000 (RICO)",
+    "FBI CART v4",
+    "FBI CJIS Security Policy v5.9",
+    "USSS Electronic Crimes TF",
+    "DEA Data Analytics",
+    "DHS CISA / EO 14028",
+    "FRE 902(13)-(14) Self-Auth",
+    "W3C JSON-LD 1.1",
+    "W3C Verifiable Credentials 2.0",
+    "FATF 40 Recommendations"
+  ],
+  "generated_utc": "2026-07-10T05:44:29.854286+00:00"
+}

@@ -1,0 +1,7 @@
+# Runtime output directories
+_run/
+evidence_vault/
+audit_logs/
+evidence/
+__pycache__/
+*.pyc
