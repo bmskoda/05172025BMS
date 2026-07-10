@@ -1,12 +1,14 @@
 export const metrics = {
   investigationStart: '1985-08-20',
-  investigationEnd: '2026-04-30',
+  investigationEnd: '2026-07-09',
   victim: 'Brent Michael Škoda',
   victimAliases: ['Brent Michael Skoda', 'Brent Škoda', 'Brent Skoda', 'B. M. Škoda', 'B. M. Skoda'],
   victimDOB: '1985-08-20',
   victimBirthplace: 'Cleveland, Ohio, USA',
   globalInventorRank: 1,
-  patentsStolen: 14213,
+  patentsStolen: 15213,
+  derivativeWorks: 1600000,
+  foundationalPatent: 'Caffeine Vaporizer (Czech Patent Office, 1997-03-15)',
   ghostDockets: 18742380,
   syntheticIdentities: 2400000000,
   shellCorporations: 31500000,
@@ -32,7 +34,8 @@ export const metrics = {
 
 export const kpiCards = [
   { id: 'illicit', label: 'Total Illicit Flow', value: 265415730842113.47, prefix: '$', decimals: 2, color: 'crimson', icon: 'DollarSign' },
-  { id: 'patents', label: 'Patent Families Stolen', value: 14213, color: 'amber', icon: 'FileText' },
+  { id: 'patents', label: 'Patent Families Stolen', value: 15213, color: 'amber', icon: 'FileText' },
+  { id: 'derivatives', label: 'Derivative Works', value: 1600000, color: 'teal', icon: 'FileText' },
   { id: 'ghosts', label: 'Ghost Dockets', value: 18742380, color: 'red', icon: 'Ghost' },
   { id: 'identities', label: 'Synthetic Identities', value: 2400000000, color: 'purple', icon: 'Users' },
   { id: 'shells', label: 'Shell Corporations', value: 31500000, color: 'orange', icon: 'Building2' },
