@@ -18,6 +18,7 @@ import {
   AlertTriangle,
   Scroll,
   UserX,
+  Landmark,
 } from 'lucide-react';
 
 export default function Sidebar({ isOpen, onClose, activeSection, onNavigate }) {
@@ -33,6 +34,7 @@ export default function Sidebar({ isOpen, onClose, activeSection, onNavigate }) 
     { id: 'tokenized', label: 'Tokenized IP Tracing', icon: Network },
     { id: 'cyberdust', label: 'Cyber Dust Detection', icon: AlertTriangle },
     { id: 'synthetic', label: 'Synthetic Inventors', icon: UserX },
+    { id: 'treasury', label: 'Treasury / GENIUS Act', icon: Landmark },
     { id: 'blockchain', label: 'Blockchain Forensics', icon: Link },
     { id: 'shellcorps', label: 'Shell Corporations', icon: Building2 },
     { id: 'fentanyl', label: 'Fentanyl Disruption', icon: Skull },
